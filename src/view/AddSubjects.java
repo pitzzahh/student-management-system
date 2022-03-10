@@ -58,7 +58,6 @@ public class AddSubjects extends javax.swing.JFrame {
         addSubjectHeader = new javax.swing.JLabel();
         subjectCodeInput = new javax.swing.JTextField();
         subjectDescriptionInput = new javax.swing.JTextField();
-        subjectUnitsInput = new javax.swing.JTextField();
         subjectUnitsLabel = new javax.swing.JLabel();
         subjectCodeLabel = new javax.swing.JLabel();
         subjectDescriptionLabel = new javax.swing.JLabel();
@@ -67,6 +66,7 @@ public class AddSubjects extends javax.swing.JFrame {
         doneButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         subjectsTextArea = new javax.swing.JTextArea();
+        subjectUnitsInput = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Subjects");
@@ -82,8 +82,6 @@ public class AddSubjects extends javax.swing.JFrame {
 
         subjectDescriptionInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         subjectDescriptionInput.setText(" ");
-
-        subjectUnitsInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         subjectUnitsLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         subjectUnitsLabel.setText("Units:");
@@ -120,6 +118,9 @@ public class AddSubjects extends javax.swing.JFrame {
         subjectsTextArea.setRows(5);
         jScrollPane1.setViewportView(subjectsTextArea);
 
+        subjectUnitsInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        subjectUnitsInput.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
+
         javax.swing.GroupLayout addStudentPanelLayout = new javax.swing.GroupLayout(addStudentPanel);
         addStudentPanel.setLayout(addStudentPanelLayout);
         addStudentPanelLayout.setHorizontalGroup(
@@ -136,10 +137,14 @@ public class AddSubjects extends javax.swing.JFrame {
                         .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(addStudentPanelLayout.createSequentialGroup()
                                 .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(subjectCodeInput)
-                                    .addComponent(subjectDescriptionInput, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                                    .addComponent(subjectUnitsInput, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(addStudentPanelLayout.createSequentialGroup()
+                                        .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(subjectCodeInput)
+                                            .addComponent(subjectDescriptionInput, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                    .addGroup(addStudentPanelLayout.createSequentialGroup()
+                                        .addComponent(subjectUnitsInput)
+                                        .addGap(246, 246, 246)))
                                 .addComponent(jScrollPane1))
                             .addGroup(addStudentPanelLayout.createSequentialGroup()
                                 .addComponent(addSubjectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,7 +186,7 @@ public class AddSubjects extends javax.swing.JFrame {
                         .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(subjectUnitsLabel)
                             .addComponent(subjectUnitsInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
+                        .addGap(18, 18, 18)
                         .addComponent(addSubjectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
@@ -206,7 +211,7 @@ public class AddSubjects extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addSubjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSubjectButtonActionPerformed
-        if(subjectCodeInput.getText().isEmpty() || subjectDescriptionInput.getText().isEmpty() || subjectUnitsInput.getText().isEmpty() || !Process.isNumber(subjectUnitsInput.getText())) {
+        if(subjectCodeInput.getText().isEmpty() || subjectDescriptionInput.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "PLEASE INSERT THE FIELDS PROPERLY");
         }
         else {
@@ -221,7 +226,7 @@ public class AddSubjects extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "SUBJECT ALREADY EXIST"); 
             }
             else{
-                Subject subject = new Subject(subjectCodeInput.getText().trim(), subjectDescriptionInput.getText().trim(), Integer.parseInt(subjectUnitsInput.getText().trim()));
+                Subject subject = new Subject(subjectCodeInput.getText().trim(), subjectDescriptionInput.getText().trim(), (int)subjectUnitsInput.getValue());
                 Process.subjects.add(subject);
                 subjectsTextArea.append(" " + subjectDescriptionInput.getText().trim() + "\n");
                 JOptionPane.showMessageDialog(null, "SUBJECT ADDED");
@@ -281,7 +286,7 @@ public class AddSubjects extends javax.swing.JFrame {
     private javax.swing.JLabel subjectCodeLabel;
     private javax.swing.JTextField subjectDescriptionInput;
     private javax.swing.JLabel subjectDescriptionLabel;
-    private javax.swing.JTextField subjectUnitsInput;
+    private javax.swing.JSpinner subjectUnitsInput;
     private javax.swing.JLabel subjectUnitsLabel;
     private javax.swing.JTextArea subjectsTextArea;
     // End of variables declaration//GEN-END:variables

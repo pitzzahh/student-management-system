@@ -22,8 +22,6 @@ public class AddCourse extends javax.swing.JFrame {
      * Creates new form addCourse
      */
     public AddCourse() {
-        JOptionPane.showMessageDialog(null, "ONLY CLICK THE SAVE ICON WHEN YOU ARE DONE ADDING SUBJECTS TO THE COURSE");
-        
         initComponents();
         courseSubjectsList.setEditable(false);
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/add_course_small.png")));

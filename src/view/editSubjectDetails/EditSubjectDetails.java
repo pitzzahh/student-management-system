@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.editSubject;
+package view.editSubjectDetails;
 
 import controller.Process;
 import java.awt.Toolkit;
@@ -28,8 +28,7 @@ public class EditSubjectDetails extends javax.swing.JFrame {
         subject.setText(selectedSubject.getSubjectDescription());
         subjectCodeInput.setText(selectedSubject.getSubjectCode());
         subjectDescriptionInput.setText(selectedSubject.getSubjectDescription());
-        unitsInput.setText(String.valueOf(selectedSubject.getUnits()));
-        
+        unitsInput.setValue(selectedSubject.getUnits());
         if(Process.isDarkTheme()) {
             editSubjectDetailsPanel.setBackground(Process.DARK_COLOR);
             editSubjectDetailsHeader.setForeground(Process.LIGHT_COLOR);
@@ -62,8 +61,8 @@ public class EditSubjectDetails extends javax.swing.JFrame {
         unitsLabel = new javax.swing.JLabel();
         subjectCodeInput = new javax.swing.JTextField();
         subjectDescriptionInput = new javax.swing.JTextField();
-        unitsInput = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
+        unitsInput = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Edit Subject Details");
@@ -93,8 +92,6 @@ public class EditSubjectDetails extends javax.swing.JFrame {
 
         subjectDescriptionInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        unitsInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
         saveButton.setBackground(new java.awt.Color(255, 255, 255));
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save_24px.png"))); // NOI18N
         saveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +99,9 @@ public class EditSubjectDetails extends javax.swing.JFrame {
                 saveButtonActionPerformed(evt);
             }
         });
+
+        unitsInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        unitsInput.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
 
         javax.swing.GroupLayout editSubjectDetailsPanelLayout = new javax.swing.GroupLayout(editSubjectDetailsPanel);
         editSubjectDetailsPanel.setLayout(editSubjectDetailsPanelLayout);
@@ -119,10 +119,12 @@ public class EditSubjectDetails extends javax.swing.JFrame {
                         .addGroup(editSubjectDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(subjectCodeInput)
                             .addGroup(editSubjectDetailsPanelLayout.createSequentialGroup()
-                                .addComponent(unitsInput, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(saveButton))
-                            .addComponent(subjectDescriptionInput)))
+                            .addComponent(subjectDescriptionInput)
+                            .addGroup(editSubjectDetailsPanelLayout.createSequentialGroup()
+                                .addComponent(unitsInput, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, editSubjectDetailsPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(selectedSubjectLabel)
@@ -180,13 +182,13 @@ public class EditSubjectDetails extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        if(subjectCodeInput.getText().isEmpty() && subjectDescriptionInput.getText().isEmpty() && unitsInput.getText().isEmpty() && !Process.isNumber(unitsInput.getText())) {
+        if(subjectCodeInput.getText().isEmpty() && subjectDescriptionInput.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "PLEASE INSERT THE FIELDS PROPERLY");
         }
         else {
             Process.subjects.get(EditSubjects.selectedSubject).setSubjectCode(subjectCodeInput.getText().trim());
             Process.subjects.get(EditSubjects.selectedSubject).setSubjectDescription(subjectDescriptionInput.getText().trim());
-            Process.subjects.get(EditSubjects.selectedSubject).setUnits(Integer.parseInt(unitsInput.getText().trim()));
+            Process.subjects.get(EditSubjects.selectedSubject).setUnits((int)unitsInput.getValue());
             Process.saveSubjectsToAFile();
             JOptionPane.showMessageDialog(null, "SUBJECT EDITED SUCCESSFULLY");
             this.dispose();
@@ -232,7 +234,7 @@ public class EditSubjectDetails extends javax.swing.JFrame {
     private javax.swing.JLabel subjectCodeLabel;
     private javax.swing.JTextField subjectDescriptionInput;
     private javax.swing.JLabel subjectDescriptionLabel;
-    private javax.swing.JTextField unitsInput;
+    private javax.swing.JSpinner unitsInput;
     private javax.swing.JLabel unitsLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import controller.Process;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
-import view.editSubject.EditSubjectDetails;
+import view.editSubjectDetails.EditSubjectDetails;
 
 /**
  *
