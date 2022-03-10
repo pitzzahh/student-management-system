@@ -84,7 +84,7 @@ public class EditSubjects extends javax.swing.JFrame {
 
         removeSubject.setBackground(new java.awt.Color(255, 255, 255));
         removeSubject.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        removeSubject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-remove-32.png"))); // NOI18N
+        removeSubject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Remove_24px.png"))); // NOI18N
         removeSubject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removeSubjectActionPerformed(evt);
@@ -117,7 +117,7 @@ public class EditSubjects extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(subjectsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editOrRemoveSubjectsPanelLayout.createSequentialGroup()
+                    .addGroup(editOrRemoveSubjectsPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(editSubjectDetaisl, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
