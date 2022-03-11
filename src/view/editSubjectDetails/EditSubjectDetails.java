@@ -5,7 +5,7 @@
  */
 package view.editSubjectDetails;
 
-import controller.Process;
+import fileHandling.Process;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import model.Subject;
@@ -29,6 +29,7 @@ public class EditSubjectDetails extends javax.swing.JFrame {
         subjectCodeInput.setText(selectedSubject.getSubjectCode());
         subjectDescriptionInput.setText(selectedSubject.getSubjectDescription());
         unitsInput.setValue(selectedSubject.getUnits());
+        
         if(Process.isDarkTheme()) {
             editSubjectDetailsPanel.setBackground(Process.DARK_COLOR);
             editSubjectDetailsHeader.setForeground(Process.LIGHT_COLOR);

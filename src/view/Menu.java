@@ -1,6 +1,6 @@
 package view;
 
-import controller.Process;
+import fileHandling.Process;
 import java.awt.Toolkit;
 
 /*
@@ -28,7 +28,6 @@ public class Menu extends javax.swing.JFrame {
             menuPanel.setBackground(Process.DARK_COLOR);
             menuBar.setBackground(Process.DARK_COLOR);
             toggleDarkModeMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/light_mode_small.png")));
-            
         }
         else {
             menuPanel.setBackground(Process.LIGHT_COLOR);
@@ -259,7 +258,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_edutCourseMenuItemActionPerformed
 
     private void editStudentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStudentMenuItemActionPerformed
-        // TODO add your handling code here:
+        new EditStudent().setVisible(true);
     }//GEN-LAST:event_editStudentMenuItemActionPerformed
 
     /**

@@ -6,37 +6,46 @@
 package view.editCourseDetails;
 
 import javax.swing.JOptionPane;
-import controller.Process;
+import fileHandling.Process;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import view.EditCourses;
 import model.Course;
 import model.Subject;
 
+
 /**
  *
  * @author 19
  */
 public class EditCourseDetails extends javax.swing.JFrame {
-    private static Course selectedCourse;
-    private static ArrayList<Subject> courseSubjects = new ArrayList<>();
+    private static Course selectedCourse = new Course();
+    private static final Subject subject = new Subject();
     
     /**
      * Creates new form EditCourseDetails
      */
     public EditCourseDetails() {
-        JOptionPane.showMessageDialog(null, "ONLY CLICK THE SAVE ICON WHEN YOU ARE DONE EDITING THE COURSE");
+
         initComponents();
         
         Process.subjects = new ArrayList<>();
         Process.listOfCourseSubjects = new ArrayList<>();
+        Process.courses = new ArrayList<>();
+
         courseSubjectsList.setEditable(false);
+        
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/add_course_small.png")));
+        
+        Process.populateCourses();
+        Process.populateSubjects();
         
         selectedCourse = Process.courses.get(EditCourses.selectedCourse);
         course.setText(selectedCourse.getCourseDescription());
         courseCodeInput.setText(selectedCourse.getCourseCode());
         courseDescriptionInput.setText(selectedCourse.getCourseDescription());
+        
+        printCurrentCourseSubjectsToListOfCourseSubjects();
         
         if(Process.isDarkTheme()) {
             editCourseDetailsPanel.setBackground(Process.DARK_COLOR);
@@ -51,17 +60,46 @@ public class EditCourseDetails extends javax.swing.JFrame {
         else {
             editCourseDetailsPanel.setBackground(Process.LIGHT_COLOR);
         }
-
-        getCourseSubjects();
-        subjectsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18));
-        subjectsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Process.getSubjects()));
+        
+        // adds all the subjects in the combo box
+        if(Process.getSubjects().length != 0) {
+            getLatestCourseSubjects();
+            subjectsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18));
+            subjectsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Process.getSubjects()));
+        } 
+        else {
+            subjectsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18));
+            subjectsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"NO SUBJECTS AVAILABLE"}));
+        }
     }
-    
-    private void getCourseSubjects() {
+    /**
+     * Method that prints the course subjects to the text area
+     */
+    private void printCurrentCourseSubjectsToListOfCourseSubjects() {
         for(int i = 0; i < selectedCourse.getSubjects().size(); i++) {
             courseSubjectsList.append(" " + selectedCourse.getSubjects().get(i).getSubjectDescription() + "\n");
-            Process.listOfCourseSubjects.add(selectedCourse.getSubjects().get(i).getSubjectCode());
-            courseSubjects.add(selectedCourse.getSubjects().get(i));
+        }
+    }
+    
+    private void checkIfSubjectIsAlreadyAdded(Subject subject) {
+        Process.exist = false;
+        for (Course currentCourse : Process.courses) {
+            if (currentCourse.getSubjects().contains(subject)) {
+                Process.exist = true;
+                break;
+            }
+        }
+    }
+    
+    public static void getLatestCourseSubjects() {
+        for(int i = 0; i < Process.courses.size(); i++) {
+            if(!Process.courses.get(i).getSubjects().isEmpty()) {
+                Process.listOfCourseSubjects.add(Process.courses.get(i).getSubjects().get(i));  
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "NO SUBJECTS");
+                break;
+            }
         }
     }
     /**
@@ -167,32 +205,41 @@ public class EditCourseDetails extends javax.swing.JFrame {
         editCourseDetailsPanelLayout.setHorizontalGroup(
             editCourseDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editCourseDetailsPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(editCourseDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(editCourseDetailsPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(saveButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, editCourseDetailsPanelLayout.createSequentialGroup()
-                        .addGroup(editCourseDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(courseDescriptionLabel)
-                            .addComponent(courseCodeLabel)
-                            .addComponent(subjectsLabel)
-                            .addComponent(selectedCourseLabel))
+                        .addGroup(editCourseDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(editCourseDetailsPanelLayout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addGroup(editCourseDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(courseCodeLabel)
+                                    .addComponent(selectedCourseLabel)))
+                            .addGroup(editCourseDetailsPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(courseDescriptionLabel))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editCourseDetailsPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(subjectsLabel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(editCourseDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(editCourseDetailsPanelLayout.createSequentialGroup()
                                 .addGroup(editCourseDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(editCourseDetailsPanelLayout.createSequentialGroup()
-                                        .addGroup(editCourseDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(courseCodeInput)
-                                            .addComponent(courseDescriptionInput)
-                                            .addComponent(subjectsComboBox, 0, 400, Short.MAX_VALUE))
+                                        .addComponent(courseCodeInput)
                                         .addGap(52, 52, 52))
                                     .addGroup(editCourseDetailsPanelLayout.createSequentialGroup()
                                         .addComponent(addSubjectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(removeSubjectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 344, Short.MAX_VALUE))
+                                    .addGroup(editCourseDetailsPanelLayout.createSequentialGroup()
+                                        .addComponent(courseDescriptionInput)
+                                        .addGap(54, 54, 54))
+                                    .addGroup(editCourseDetailsPanelLayout.createSequentialGroup()
+                                        .addComponent(subjectsComboBox, 0, 398, Short.MAX_VALUE)
+                                        .addGap(54, 54, 54)))
                                 .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(editCourseDetailsPanelLayout.createSequentialGroup()
                                 .addComponent(course)
@@ -218,7 +265,7 @@ public class EditCourseDetails extends javax.swing.JFrame {
                         .addComponent(course)))
                 .addGroup(editCourseDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(editCourseDetailsPanelLayout.createSequentialGroup()
-                        .addGap(54, 54, 54)
+                        .addGap(15, 15, 15)
                         .addGroup(editCourseDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(courseCodeLabel)
                             .addComponent(courseCodeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -226,15 +273,15 @@ public class EditCourseDetails extends javax.swing.JFrame {
                         .addGroup(editCourseDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(courseDescriptionLabel)
                             .addComponent(courseDescriptionInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(editCourseDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(subjectsLabel)
                             .addComponent(subjectsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(editCourseDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(addSubjectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(removeSubjectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(94, 94, 94))
+                            .addComponent(removeSubjectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE))
                     .addGroup(editCourseDetailsPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(scrollPanel)
@@ -261,16 +308,17 @@ public class EditCourseDetails extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        if(courseCodeInput.getText().isEmpty() && courseDescriptionInput.getText().isEmpty() && courseSubjects.isEmpty()) {
+        if(courseCodeInput.getText().isEmpty() && courseDescriptionInput.getText().isEmpty() && Process.listOfCourseSubjects.isEmpty()) {
             JOptionPane.showMessageDialog(null, "PLEASE INSERT THE FIELDS PROPERLY");
         }
         else {
-            for (Subject subject : courseSubjects) {
-                Process.courses.get(EditCourses.selectedCourse).setCourseCode(subject.getSubjectCode());
-                Process.courses.get(EditCourses.selectedCourse).setCourseDescription(subject.getSubjectDescription());
-            }
+            Process.courses.get(EditCourses.selectedCourse).setSubjects(Process.listOfCourseSubjects);
+            Process.courses.get(EditCourses.selectedCourse).setCourseCode(courseCodeInput.getText().trim());
+            Process.courses.get(EditCourses.selectedCourse).setCourseDescription(courseDescriptionInput.getText().trim());
+            
             Process.saveCoursesToAFile();
             JOptionPane.showMessageDialog(null, "COURSE EDITED SUCCESSFULLY");
+            Process.listOfCourseSubjects.clear();
             this.dispose();
         }
     }//GEN-LAST:event_saveButtonActionPerformed
@@ -284,38 +332,43 @@ public class EditCourseDetails extends javax.swing.JFrame {
     }//GEN-LAST:event_subjectsComboBoxActionPerformed
 
     private void addSubjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSubjectButtonActionPerformed
-        Subject subject = new Subject();
-        
-        if(courseCodeInput.getText().trim().isEmpty() && courseDescriptionInput.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "PLEASE INSERT THE FIELDS PROPERLY");
+
+        subject.setSubjectCode(Process.subjects.get(subjectsComboBox.getSelectedIndex()).getSubjectCode());
+        subject.setSubjectDescription(Process.subjects.get(subjectsComboBox.getSelectedIndex()).getSubjectDescription());
+        subject.setUnits(Process.subjects.get(subjectsComboBox.getSelectedIndex()).getUnits());
+            
+        checkIfSubjectIsAlreadyAdded(subject);
+            
+        if(Process.exist) {
+            JOptionPane.showMessageDialog(null, "SUBJECT ALREADY ADDED");
         }
         else {
-            subject.setSubjectCode(Process.subjects.get(subjectsComboBox.getSelectedIndex()).getSubjectCode());
-            subject.setSubjectDescription(Process.subjects.get(subjectsComboBox.getSelectedIndex()).getSubjectDescription());
-            subject.setUnits(Process.subjects.get(subjectsComboBox.getSelectedIndex()).getUnits());
-            
-            Process.exist = false;
-            
-            for(String addedSubject : Process.listOfCourseSubjects) {
-                if (addedSubject.contains(subject.getSubjectCode())) {
-                    Process.exist = true;
-                    break;
-                }
-            }
-            
-            if(Process.exist) {
-                JOptionPane.showMessageDialog(null, "SUBJECT ALREADY ADDED");
-            }
-            else {
-                courseSubjectsList.append(" " + subject.getSubjectDescription() + "\n");
-                JOptionPane.showMessageDialog(null, "SUBJECT ADDED");
-                Process.listOfCourseSubjects.add(subject.getSubjectCode());
-            }
+            Process.listOfCourseSubjects.add(subject);
+            courseSubjectsList.append(" " + subject.getSubjectDescription() + "\n");
+            JOptionPane.showMessageDialog(null, "SUBJECT ADDED");
         }
     }//GEN-LAST:event_addSubjectButtonActionPerformed
-
+    
     private void removeSubjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSubjectButtonActionPerformed
-        getCourseSubjects();
+        
+        try {
+            getLatestCourseSubjects();
+            checkIfSubjectIsAlreadyAdded(Process.subjects.get(subjectsComboBox.getSelectedIndex()));
+        
+            if(Process.exist) {
+                Process.courses.get(EditCourses.selectedCourse).getSubjects().remove(subjectsComboBox.getSelectedIndex());
+                courseSubjectsList.selectAll();
+                courseSubjectsList.replaceSelection("");
+                printCurrentCourseSubjectsToListOfCourseSubjects();
+                Process.listOfCourseSubjects.remove(subjectsComboBox.getSelectedIndex());
+                JOptionPane.showMessageDialog(null, "SUBJECT SUCCESSFULLY REMOVED FROM THE COURSE");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "SUBJECT IS NOT IN THE COURSE");
+            }
+        } catch(Exception exception) {
+            JOptionPane.showMessageDialog(null, "SUBJECT ALREADY REMOVED FROM THE COURSE");
+        }
     }//GEN-LAST:event_removeSubjectButtonActionPerformed
 
     /**

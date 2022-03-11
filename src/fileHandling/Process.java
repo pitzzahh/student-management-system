@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package fileHandling;
 
 import java.awt.Color;
 import java.io.EOFException;
@@ -28,11 +28,14 @@ public class Process {
     
     public static final Color LIGHT_COLOR = new Color(255, 255, 255);
     public static final Color DARK_COLOR = new Color(68, 68, 68);
+
     public static ArrayList<String> listOfAddedSubjects;
-    public static ArrayList<String> listOfCourseSubjects;
+    public static ArrayList<Subject> listOfCourseSubjects;
+    
     public static ArrayList<Student> students;
     public static ArrayList<Course> courses;
     public static ArrayList<Subject> subjects;
+    
     public static Boolean theme = false;
     public static boolean exist;
     
@@ -157,7 +160,7 @@ public class Process {
     public static String[] getStudents() {
         String[] studentsList = new String[students.size()];
         for(int i = 0; i < students.size(); i++) {
-            studentsList[i] = "Student No: " + students.get(i).getStudentNumber() +", Name: " + students.get(i).getFirstName() + " " + students.get(i).getLastName();
+            studentsList[i] = students.get(i).getFirstName() + " " + students.get(i).getLastName();
         }
         return studentsList;
     }

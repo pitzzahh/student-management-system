@@ -1,8 +1,6 @@
 package model;
 
-import java.io.Serializable;
-
-public class Student extends Person implements Serializable {
+public class Student extends Person {
     private String studentNumber;
     private Course course;
     
@@ -13,10 +11,14 @@ public class Student extends Person implements Serializable {
 
     /**
      * public Constructor that initializes the private fields {@code studentNumber} and {@code course}
+     * @param firstName firstName of Student
+     * @param lastName lastName of student
+     * @param address address of Student
      * @param studentNumber the student number.
      * @param studentCourse the student course.
      */
-    public Student(String studentNumber, Course studentCourse) {
+    public Student(String firstName, String lastName, String address, String studentNumber, Course studentCourse) {
+        super(firstName, lastName, address);
         this.studentNumber = studentNumber;
         this.course = studentCourse;
     }

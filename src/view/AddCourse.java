@@ -6,7 +6,7 @@
 package view;
 
 import javax.swing.JOptionPane;
-import controller.Process;
+import fileHandling.Process;
 import java.awt.*;
 import java.util.ArrayList;
 import model.Course;
@@ -25,6 +25,7 @@ public class AddCourse extends javax.swing.JFrame {
         initComponents();
         courseSubjectsList.setEditable(false);
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/add_course_small.png")));
+        
         Process.subjects = new ArrayList<>();
         Process.courses = new ArrayList<>();
         Process.listOfAddedSubjects = new ArrayList<>();
@@ -43,8 +44,16 @@ public class AddCourse extends javax.swing.JFrame {
         else {
             addCoursePanel.setBackground(Process.LIGHT_COLOR);
         }
-        subjectsComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18));
-        subjectsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Process.getSubjects()));
+        
+        if(Process.getSubjects().length != 0) {
+            subjectsComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18));
+            subjectsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Process.getSubjects()));
+        }
+        else {
+            subjectsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+            subjectsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"NO SUBJECTS AVAILABLE"}));
+        }
+
     }
 
     /**

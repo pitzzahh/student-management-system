@@ -5,7 +5,7 @@
  */
 package view;
 
-import controller.Process;
+import fileHandling.Process;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -41,9 +41,7 @@ public class AddSubjects extends javax.swing.JFrame {
             addStudentPanel.setBackground(Process.LIGHT_COLOR);
         }
         
-        Process.subjects.stream().forEach((subject) -> {
-            subjectsTextArea.append(" " + subject.getSubjectDescription() + "\n");
-        });
+        Process.subjects.forEach((subject) -> subjectsTextArea.append(" " + subject.getSubjectDescription() + "\n"));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -237,6 +235,7 @@ public class AddSubjects extends javax.swing.JFrame {
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
         if (!Process.subjects.isEmpty()) {
             Process.saveSubjectsToAFile();
+            JOptionPane.showMessageDialog(null, "SUBJECTS SAVED SUCCESSFULLY");
             this.dispose();
         }
         else {

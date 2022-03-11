@@ -7,7 +7,7 @@ package view;
 
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
-import controller.Process;
+import fileHandling.Process;
 import java.util.ArrayList;
 import view.editCourseDetails.EditCourseDetails;
 /**
@@ -15,7 +15,7 @@ import view.editCourseDetails.EditCourseDetails;
  * @author 19
  */
 public class EditCourses extends javax.swing.JFrame {
-    public static int selectedCourse;
+    public static int selectedCourse = 0;
     /**
      * Creates new form EditCourses
      */
@@ -23,12 +23,10 @@ public class EditCourses extends javax.swing.JFrame {
         
         initComponents();
         
-        Process.subjects = new ArrayList<>();
         Process.courses = new ArrayList<>();
         
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/add_course_small.png")));
         
-        Process.populateSubjects();
         Process.populateCourses();
         
         if(Process.isDarkTheme()) {
@@ -171,8 +169,15 @@ public class EditCourses extends javax.swing.JFrame {
     }//GEN-LAST:event_removeCourseButtonActionPerformed
 
     private void editCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCourseButtonActionPerformed
-        selectedCourse = coursesComboBox.getSelectedIndex();
-        new EditCourseDetails().setVisible(true);
+        if(Process.courses.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "THERE ARE NO COURSE TO BE EDITED");
+        }
+        else {
+            selectedCourse = coursesComboBox.getSelectedIndex();
+            new EditCourseDetails().setVisible(true);
+        }
+        
+
     }//GEN-LAST:event_editCourseButtonActionPerformed
 
     private void coursesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coursesComboBoxActionPerformed
@@ -182,7 +187,7 @@ public class EditCourses extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -195,22 +200,16 @@ public class EditCourses extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(EditCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EditCourses().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new EditCourses().setVisible(true);
         });
     }
 

@@ -6,7 +6,7 @@
 package view;
 
 import java.util.ArrayList;
-import controller.Process;
+import fileHandling.Process;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import view.editSubjectDetails.EditSubjectDetails;

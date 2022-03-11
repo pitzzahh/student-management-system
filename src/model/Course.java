@@ -60,7 +60,7 @@ public class Course implements Serializable {
      * Method that sets the subjects.
      * @param subjects the subjects of a course.
      */
-    private void setSubjects(ArrayList<Subject> subjects) {
+    public final void setSubjects(ArrayList<Subject> subjects) {
         this.subjects = subjects;
     }
 

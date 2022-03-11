@@ -6,7 +6,7 @@
 package view;
 
 import java.util.ArrayList;
-import controller.Process;
+import fileHandling.Process;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import model.Student;
@@ -197,7 +197,7 @@ public class AddStudent extends javax.swing.JFrame {
 
     private void addStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentButtonActionPerformed
         
-        if((firstNameInput.getText().trim().isEmpty() && lastNameInput.getText().trim().isEmpty() && addressInput.getText().trim().isEmpty() && studentIdInput.getText().trim().isEmpty()) || !Process.isNumber(studentIdInput.getText())) {
+        if((firstNameInput.getText().trim().isEmpty() && lastNameInput.getText().trim().isEmpty() && addressInput.getText().trim().isEmpty() && studentIdInput.getText().trim().isEmpty()) && !Process.isNumber(studentIdInput.getText())) {
             JOptionPane.showMessageDialog(null, "PLEASE INSERT THE FIELDS PROPERLY");
         }
         else {
@@ -212,7 +212,7 @@ public class AddStudent extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "STUDENT ALREADY EXISTS");
             }
             else {
-                Student student = new Student(studentIdInput.getText().trim(), Process.courses.get(coursesComboBox.getSelectedIndex()));
+                Student student = new Student(firstNameInput.getText().trim(), lastNameInput.getText().trim(), addressInput.getText().trim(), studentIdInput.getText().trim(), Process.courses.get(coursesComboBox.getSelectedIndex()));
                 Process.students.add(student);
                 Process.saveStudentsToAFile();
                 JOptionPane.showMessageDialog(null, "STUDENT ADDED");      

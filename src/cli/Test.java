@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package cli;
-import controller.Process;
+import fileHandling.Process;
 import java.util.ArrayList;
 /**
  *
