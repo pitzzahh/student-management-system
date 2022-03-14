@@ -8,17 +8,18 @@ import fileHandling.Process;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import model.Course;
 /**
  *
  * @author 19
  */
 public class EditStudent extends javax.swing.JFrame {
-
     /**
      * Creates new form EditStudent
      */
     public EditStudent() {
-        
+
         initComponents();
         
         Process.students = new ArrayList<>();
@@ -26,11 +27,13 @@ public class EditStudent extends javax.swing.JFrame {
         Process.populateStudents();
         Process.populateCourses();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/icons8-edit-profile-30.png")));
-        
-        firstNameInput.setText(Process.students.get(studentsComboBox.getSelectedIndex()).getFirstName());
-        lastNameInput.setText(Process.students.get(studentsComboBox.getSelectedIndex()).getLastName());
-        addressInput.setText(Process.students.get(studentsComboBox.getSelectedIndex()).getAddress());
-        studentIdInput.setText(Process.students.get(studentsComboBox.getSelectedIndex()).getStudentNumber());
+        if(!Process.students.isEmpty()) {
+            firstNameInput.setText(Process.students.get(studentsComboBox.getSelectedIndex()).getFirstName());
+            lastNameInput.setText(Process.students.get(studentsComboBox.getSelectedIndex()).getLastName());
+            addressInput.setText(Process.students.get(studentsComboBox.getSelectedIndex()).getAddress());
+            ageInput.setText(String.valueOf(Process.students.get(studentsComboBox.getSelectedIndex()).getAge()));
+            studentIdInput.setText(Process.students.get(studentsComboBox.getSelectedIndex()).getStudentNumber());
+        }
         
         if(Process.isDarkTheme()) {
             editOrRemoveStudentPanel.setBackground(Process.DARK_COLOR);
@@ -38,6 +41,7 @@ public class EditStudent extends javax.swing.JFrame {
             editOrRemoveStudentHeader.setForeground(Process.LIGHT_COLOR);
             firstNameLabel.setForeground(Process.LIGHT_COLOR);
             lastNameLabel.setForeground(Process.LIGHT_COLOR);
+            ageLabel.setForeground(Process.LIGHT_COLOR);
             addressLabel.setForeground(Process.LIGHT_COLOR);
             studentIdLabel.setForeground(Process.LIGHT_COLOR);
             courseLabel.setForeground(Process.LIGHT_COLOR);
@@ -48,6 +52,7 @@ public class EditStudent extends javax.swing.JFrame {
             editOrRemoveStudentHeader.setForeground(Process.DARK_COLOR);
             firstNameLabel.setForeground(Process.DARK_COLOR);
             lastNameLabel.setForeground(Process.DARK_COLOR);
+            ageLabel.setForeground(Process.DARK_COLOR);
             addressLabel.setForeground(Process.DARK_COLOR);
             studentIdLabel.setForeground(Process.DARK_COLOR);
             courseLabel.setForeground(Process.DARK_COLOR);
@@ -61,7 +66,7 @@ public class EditStudent extends javax.swing.JFrame {
         }
         else {
             studentsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-            studentsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"NO SUBJECTS AVAILABLE"}));
+            studentsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"NO STUDENTS AVAILABLE"}));
             
             coursesComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18));
             coursesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"NO COURSES AVAILABLE"}));
@@ -80,15 +85,17 @@ public class EditStudent extends javax.swing.JFrame {
         editOrRemoveStudentPanel = new javax.swing.JPanel();
         editOrRemoveStudentHeader = new javax.swing.JLabel();
         selectAStudentLabel = new javax.swing.JLabel();
-        studentsComboBox = new javax.swing.JComboBox();
+        studentsComboBox = new javax.swing.JComboBox<>();
         firstNameLabel = new javax.swing.JLabel();
         lastNameLabel = new javax.swing.JLabel();
+        ageLabel = new javax.swing.JLabel();
+        ageInput = new javax.swing.JTextField();
         addressLabel = new javax.swing.JLabel();
         firstNameInput = new javax.swing.JTextField();
         studentIdLabel = new javax.swing.JLabel();
         lastNameInput = new javax.swing.JTextField();
         courseLabel = new javax.swing.JLabel();
-        coursesComboBox = new javax.swing.JComboBox();
+        coursesComboBox = new javax.swing.JComboBox<String>();
         addressInput = new javax.swing.JTextField();
         studentIdInput = new javax.swing.JTextField();
         saveStudentButton = new javax.swing.JButton();
@@ -106,13 +113,23 @@ public class EditStudent extends javax.swing.JFrame {
         selectAStudentLabel.setText("Select a Student:");
 
         studentsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        studentsComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Student 1", "Student 2", "Student 3", "Student 4" }));
+        studentsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student 1", "Student 2", "Student 3", "Student 4" }));
+        studentsComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                studentsComboBoxActionPerformed(evt);
+            }
+        });
 
         firstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         firstNameLabel.setText("First Name:");
 
         lastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lastNameLabel.setText("Last Name:");
+
+        ageLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ageLabel.setText("Age:");
+
+        ageInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addressLabel.setText("Address:");
@@ -133,7 +150,7 @@ public class EditStudent extends javax.swing.JFrame {
         courseLabel.setText("Course:");
 
         coursesComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        coursesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Course 1", "Course 2", "Course 3", "Course 4" }));
+        coursesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Course 1", "Course 2", "Course 3", "Course 4" }));
 
         addressInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -141,9 +158,19 @@ public class EditStudent extends javax.swing.JFrame {
 
         saveStudentButton.setBackground(new java.awt.Color(255, 255, 255));
         saveStudentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save_24px.png"))); // NOI18N
+        saveStudentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveStudentButtonActionPerformed(evt);
+            }
+        });
 
         removeStudentButton.setBackground(new java.awt.Color(255, 255, 255));
         removeStudentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Remove_24px.png"))); // NOI18N
+        removeStudentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeStudentButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout editOrRemoveStudentPanelLayout = new javax.swing.GroupLayout(editOrRemoveStudentPanel);
         editOrRemoveStudentPanel.setLayout(editOrRemoveStudentPanelLayout);
@@ -163,7 +190,8 @@ public class EditStudent extends javax.swing.JFrame {
                             .addComponent(addressLabel)
                             .addComponent(lastNameLabel)
                             .addComponent(firstNameLabel)
-                            .addComponent(selectAStudentLabel))
+                            .addComponent(selectAStudentLabel)
+                            .addComponent(ageLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(editOrRemoveStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(studentsComboBox, 0, 485, Short.MAX_VALUE)
@@ -171,7 +199,8 @@ public class EditStudent extends javax.swing.JFrame {
                             .addComponent(lastNameInput)
                             .addComponent(addressInput)
                             .addComponent(studentIdInput)
-                            .addComponent(coursesComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(coursesComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ageInput))
                         .addGap(58, 58, 58))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editOrRemoveStudentPanelLayout.createSequentialGroup()
                         .addComponent(removeStudentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,7 +225,11 @@ public class EditStudent extends javax.swing.JFrame {
                 .addGroup(editOrRemoveStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lastNameLabel)
                     .addComponent(lastNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(editOrRemoveStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ageLabel)
+                    .addComponent(ageInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editOrRemoveStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addressLabel)
                     .addComponent(addressInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -208,7 +241,7 @@ public class EditStudent extends javax.swing.JFrame {
                 .addGroup(editOrRemoveStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(courseLabel)
                     .addComponent(coursesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(editOrRemoveStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(removeStudentButton, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                     .addComponent(saveStudentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -223,7 +256,7 @@ public class EditStudent extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(editOrRemoveStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(editOrRemoveStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -233,6 +266,53 @@ public class EditStudent extends javax.swing.JFrame {
     private void lastNameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_lastNameInputActionPerformed
+
+    private void studentsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentsComboBoxActionPerformed
+        firstNameInput.setText(Process.students.get(studentsComboBox.getSelectedIndex()).getFirstName());
+        lastNameInput.setText(Process.students.get(studentsComboBox.getSelectedIndex()).getLastName());
+        ageInput.setText(String.valueOf(Process.students.get(studentsComboBox.getSelectedIndex()).getAge()));
+        addressInput.setText(Process.students.get(studentsComboBox.getSelectedIndex()).getAddress());
+        studentIdInput.setText(Process.students.get(studentsComboBox.getSelectedIndex()).getStudentNumber());
+        
+        Course course = Process.courses.get(studentsComboBox.getSelectedIndex());
+        int courseIndex = 0;
+        for (int i = 0; i < Process.courses.size(); i++) {
+            if(Process.courses.get(i).equals(course)) {
+               courseIndex = i;
+               break;
+            }
+        }
+        coursesComboBox.setSelectedIndex(courseIndex);
+    }//GEN-LAST:event_studentsComboBoxActionPerformed
+
+    private void removeStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeStudentButtonActionPerformed
+        Process.students.remove(studentsComboBox.getSelectedIndex());
+        Process.saveStudentsToAFile();
+        JOptionPane.showMessageDialog(null, "STUDENT REMVED SUCCESSFULLY");
+        this.dispose();
+    }//GEN-LAST:event_removeStudentButtonActionPerformed
+
+    private void saveStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveStudentButtonActionPerformed
+        
+        if(firstNameInput.getText().isEmpty() && 
+           lastNameInput.getText().isEmpty() && 
+           ageInput.getText().isEmpty() &&
+           addressInput.getText().isEmpty() &&
+           !Process.isNumber(studentIdInput.getText().trim())) {
+            JOptionPane.showMessageDialog(null, "PLEASE INSERT THE FIELDS PROPERLY");
+        }
+        else {
+            Process.students.get(studentsComboBox.getSelectedIndex()).setFirstName(firstNameInput.getText().trim());
+            Process.students.get(studentsComboBox.getSelectedIndex()).setLastName(lastNameInput.getText().trim());
+            Process.students.get(studentsComboBox.getSelectedIndex()).setAge(Byte.parseByte(ageInput.getText().trim()));
+            Process.students.get(studentsComboBox.getSelectedIndex()).setAddress(addressInput.getText().trim());
+            Process.students.get(studentsComboBox.getSelectedIndex()).setStudentNumber(studentIdInput.getText().trim());
+            Process.students.get(studentsComboBox.getSelectedIndex()).setCourse(Process.courses.get(coursesComboBox.getSelectedIndex()));
+            Process.saveStudentsToAFile();
+            JOptionPane.showMessageDialog(null, "STUDENT SAVED SUCCESSFULLY");
+            this.dispose();
+        }
+    }//GEN-LAST:event_saveStudentButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,8 +346,10 @@ public class EditStudent extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addressInput;
     private javax.swing.JLabel addressLabel;
+    private javax.swing.JTextField ageInput;
+    private javax.swing.JLabel ageLabel;
     private javax.swing.JLabel courseLabel;
-    private javax.swing.JComboBox coursesComboBox;
+    private javax.swing.JComboBox<String> coursesComboBox;
     private javax.swing.JLabel editOrRemoveStudentHeader;
     private javax.swing.JPanel editOrRemoveStudentPanel;
     private javax.swing.JTextField firstNameInput;
@@ -279,6 +361,6 @@ public class EditStudent extends javax.swing.JFrame {
     private javax.swing.JLabel selectAStudentLabel;
     private javax.swing.JTextField studentIdInput;
     private javax.swing.JLabel studentIdLabel;
-    private javax.swing.JComboBox studentsComboBox;
+    private javax.swing.JComboBox<String> studentsComboBox;
     // End of variables declaration//GEN-END:variables
 }

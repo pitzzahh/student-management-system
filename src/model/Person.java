@@ -19,11 +19,13 @@ public class Person implements Serializable {
      * public Constructor that initializes the private fields {@code firstName}, {@code lastName}, and {@code address}
      * @param firstName the first name of a person
      * @param lastName the last name of a person
+     * @param age the age of a person
      * @param address the address of a person
      */
-    public Person(String firstName, String lastName, String address) {
+    public Person(String firstName, String lastName, byte age, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.age = age;
         this.address = address;
     }
 

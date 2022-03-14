@@ -5,11 +5,10 @@
         <group>
             <file>file:/C:/Users/19/myJavaProjects/studentManagementSystem/src/view/EditCourses.java</file>
             <file>file:/C:/Users/19/myJavaProjects/studentManagementSystem/src/view/editCourseDetails/EditCourseDetails.java</file>
-            <file>file:/C:/Users/19/myJavaProjects/studentManagementSystem/src/view/AddCourse.java</file>
-            <file>file:/C:/Users/19/myJavaProjects/studentManagementSystem/src/controller/Process.java</file>
             <file>file:/C:/Users/19/myJavaProjects/studentManagementSystem/src/view/AddStudent.java</file>
+            <file>file:/C:/Users/19/myJavaProjects/studentManagementSystem/src/model/Person.java</file>
             <file>file:/C:/Users/19/myJavaProjects/studentManagementSystem/src/model/Course.java</file>
-            <file>file:/C:/Users/19/myJavaProjects/studentManagementSystem/src/view/Menu.java</file>
+            <file>file:/C:/Users/19/myJavaProjects/studentManagementSystem/src/model/Student.java</file>
             <file>file:/C:/Users/19/myJavaProjects/studentManagementSystem/src/view/EditStudent.java</file>
         </group>
     </open-files>

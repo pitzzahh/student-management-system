@@ -35,6 +35,7 @@ public class AddStudent extends javax.swing.JFrame {
             addStudentHeader.setForeground(Process.LIGHT_COLOR);
             firstNameLabel.setForeground(Process.LIGHT_COLOR);
             lastNameLabel.setForeground(Process.LIGHT_COLOR);
+            ageLabel.setForeground(Process.LIGHT_COLOR);
             addressLabel.setForeground(Process.LIGHT_COLOR);
             studentIdLabel.setForeground(Process.LIGHT_COLOR);
             courseLabel.setForeground(Process.LIGHT_COLOR);
@@ -68,6 +69,8 @@ public class AddStudent extends javax.swing.JFrame {
         firstNameInput = new javax.swing.JTextField();
         lastNameLabel = new javax.swing.JLabel();
         lastNameInput = new javax.swing.JTextField();
+        ageLabel = new javax.swing.JLabel();
+        ageInput = new javax.swing.JTextField();
         addressLabel = new javax.swing.JLabel();
         addressInput = new javax.swing.JTextField();
         studentIdLabel = new javax.swing.JLabel();
@@ -92,6 +95,11 @@ public class AddStudent extends javax.swing.JFrame {
         lastNameLabel.setText("Last Name:");
 
         lastNameInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        ageLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ageLabel.setText("Age:");
+
+        ageInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addressLabel.setText("Address:");
@@ -127,27 +135,34 @@ public class AddStudent extends javax.swing.JFrame {
         addStudentPanelLayout.setHorizontalGroup(
             addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addStudentPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addStudentPanelLayout.createSequentialGroup()
-                        .addGap(364, 364, 364)
-                        .addComponent(addStudentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(addStudentPanelLayout.createSequentialGroup()
-                        .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lastNameLabel)
-                            .addComponent(firstNameLabel)
-                            .addComponent(addressLabel)
-                            .addComponent(studentIdLabel)
-                            .addComponent(courseLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addStudentHeader)
-                            .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(studentIdInput, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(addressInput, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lastNameInput, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(firstNameInput, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(coursesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addStudentPanelLayout.createSequentialGroup()
+                                .addGap(468, 468, 468)
+                                .addComponent(addStudentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(addStudentPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(firstNameLabel)
+                                    .addComponent(addressLabel)
+                                    .addComponent(studentIdLabel)
+                                    .addComponent(courseLabel)
+                                    .addComponent(ageLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(addStudentHeader)
+                                    .addComponent(studentIdInput)
+                                    .addComponent(addressInput)
+                                    .addComponent(coursesComboBox, 0, 410, Short.MAX_VALUE)
+                                    .addComponent(firstNameInput, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                                    .addComponent(ageInput))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(addStudentPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lastNameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lastNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         addStudentPanelLayout.setVerticalGroup(
@@ -155,7 +170,7 @@ public class AddStudent extends javax.swing.JFrame {
             .addGroup(addStudentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(addStudentHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
                 .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(firstNameLabel)
                     .addComponent(firstNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -163,7 +178,11 @@ public class AddStudent extends javax.swing.JFrame {
                 .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lastNameLabel)
                     .addComponent(lastNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ageLabel)
+                    .addComponent(ageInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addressLabel)
                     .addComponent(addressInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -212,7 +231,7 @@ public class AddStudent extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "STUDENT ALREADY EXISTS");
             }
             else {
-                Student student = new Student(firstNameInput.getText().trim(), lastNameInput.getText().trim(), addressInput.getText().trim(), studentIdInput.getText().trim(), Process.courses.get(coursesComboBox.getSelectedIndex()));
+                Student student = new Student(firstNameInput.getText().trim(), lastNameInput.getText().trim(), Byte.parseByte(ageInput.getText().trim()), addressInput.getText().trim(), studentIdInput.getText().trim(), Process.courses.get(coursesComboBox.getSelectedIndex()));
                 Process.students.add(student);
                 Process.saveStudentsToAFile();
                 JOptionPane.showMessageDialog(null, "STUDENT ADDED");      
@@ -262,6 +281,8 @@ public class AddStudent extends javax.swing.JFrame {
     private javax.swing.JPanel addStudentPanel;
     private javax.swing.JTextField addressInput;
     private javax.swing.JLabel addressLabel;
+    private javax.swing.JTextField ageInput;
+    private javax.swing.JLabel ageLabel;
     private javax.swing.JLabel courseLabel;
     private javax.swing.JComboBox coursesComboBox;
     private javax.swing.JTextField firstNameInput;

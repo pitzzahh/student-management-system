@@ -41,31 +41,40 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="364" max="-2" attributes="0"/>
-                          <Component id="addStudentButton" min="-2" pref="51" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lastNameLabel" min="-2" max="-2" attributes="0"/>
-                              <Component id="firstNameLabel" min="-2" max="-2" attributes="0"/>
-                              <Component id="addressLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="studentIdLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="courseLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="addStudentHeader" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="studentIdInput" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="addressInput" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lastNameInput" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="firstNameInput" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="coursesComboBox" min="-2" pref="410" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="468" max="-2" attributes="0"/>
+                                  <Component id="addStudentButton" min="-2" pref="51" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="firstNameLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addressLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="studentIdLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="courseLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ageLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="addStudentHeader" min="-2" max="-2" attributes="0"/>
+                                      <Component id="studentIdInput" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="addressInput" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="coursesComboBox" alignment="0" pref="410" max="32767" attributes="0"/>
+                                      <Component id="firstNameInput" alignment="0" pref="410" max="32767" attributes="0"/>
+                                      <Component id="ageInput" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lastNameLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="lastNameInput" min="-2" pref="410" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -77,7 +86,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="addStudentHeader" min="-2" pref="22" max="-2" attributes="0"/>
-                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="firstNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="firstNameInput" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -87,7 +96,12 @@
                       <Component id="lastNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lastNameInput" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="ageLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="ageInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="addressLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="addressInput" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -142,6 +156,21 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="lastNameInput">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="ageLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Age:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="ageInput">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>

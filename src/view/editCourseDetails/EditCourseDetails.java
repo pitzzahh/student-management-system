@@ -13,12 +13,12 @@ import view.EditCourses;
 import model.Course;
 import model.Subject;
 
-
 /**
  *
  * @author 19
  */
 public class EditCourseDetails extends javax.swing.JFrame {
+    
     private static Course selectedCourse = new Course();
     private static final Subject subject = new Subject();
     
@@ -29,10 +29,10 @@ public class EditCourseDetails extends javax.swing.JFrame {
 
         initComponents();
         
-        Process.subjects = new ArrayList<>();
         Process.listOfCourseSubjects = new ArrayList<>();
         Process.courses = new ArrayList<>();
-
+        Process.subjects = new ArrayList<>();
+        
         courseSubjectsList.setEditable(false);
         
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/add_course_small.png")));
@@ -41,6 +41,7 @@ public class EditCourseDetails extends javax.swing.JFrame {
         Process.populateSubjects();
         
         selectedCourse = Process.courses.get(EditCourses.selectedCourse);
+        
         course.setText(selectedCourse.getCourseDescription());
         courseCodeInput.setText(selectedCourse.getCourseCode());
         courseDescriptionInput.setText(selectedCourse.getCourseDescription());

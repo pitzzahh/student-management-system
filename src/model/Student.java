@@ -13,19 +13,17 @@ public class Student extends Person {
      * public Constructor that initializes the private fields {@code studentNumber} and {@code course}
      * @param firstName firstName of Student
      * @param lastName lastName of student
+     * @param age age of a student
      * @param address address of Student
      * @param studentNumber the student number.
      * @param studentCourse the student course.
      */
-    public Student(String firstName, String lastName, String address, String studentNumber, Course studentCourse) {
-        super(firstName, lastName, address);
+    public Student(String firstName, String lastName, byte age, String address, String studentNumber, Course studentCourse) {
+        super(firstName, lastName, age ,address);
         this.studentNumber = studentNumber;
         this.course = studentCourse;
     }
     
-    public boolean equals(Student student) {
-        return (this.studentNumber.equals(student.studentNumber) && this.course.equals(student.course));
-    }
     
     /**
      * Method that sets the student number.

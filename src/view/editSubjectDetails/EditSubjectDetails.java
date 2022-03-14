@@ -25,6 +25,7 @@ public class EditSubjectDetails extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/edit_subject_small.png")));
         
         selectedSubject = Process.subjects.get(EditSubjects.selectedSubject);
+        
         subject.setText(selectedSubject.getSubjectDescription());
         subjectCodeInput.setText(selectedSubject.getSubjectCode());
         subjectDescriptionInput.setText(selectedSubject.getSubjectDescription());
@@ -102,40 +103,35 @@ public class EditSubjectDetails extends javax.swing.JFrame {
         });
 
         unitsInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        unitsInput.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
+        unitsInput.setModel(new javax.swing.SpinnerNumberModel(1, 1, 6, 1));
 
         javax.swing.GroupLayout editSubjectDetailsPanelLayout = new javax.swing.GroupLayout(editSubjectDetailsPanel);
         editSubjectDetailsPanel.setLayout(editSubjectDetailsPanelLayout);
         editSubjectDetailsPanelLayout.setHorizontalGroup(
             editSubjectDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editSubjectDetailsPanelLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
                 .addGroup(editSubjectDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, editSubjectDetailsPanelLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(editSubjectDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(subjectDescriptionLabel)
-                            .addComponent(subjectCodeLabel)
-                            .addComponent(unitsLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(editSubjectDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(subjectCodeInput)
-                            .addGroup(editSubjectDetailsPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(saveButton))
-                            .addComponent(subjectDescriptionInput)
-                            .addGroup(editSubjectDetailsPanelLayout.createSequentialGroup()
-                                .addComponent(unitsInput, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, editSubjectDetailsPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(selectedSubjectLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(subject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(subjectDescriptionLabel)
+                    .addComponent(subjectCodeLabel)
+                    .addComponent(unitsLabel)
+                    .addComponent(selectedSubjectLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(editSubjectDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(subjectCodeInput)
+                    .addGroup(editSubjectDetailsPanelLayout.createSequentialGroup()
+                        .addGap(0, 430, Short.MAX_VALUE)
+                        .addComponent(saveButton))
+                    .addComponent(subjectDescriptionInput)
+                    .addGroup(editSubjectDetailsPanelLayout.createSequentialGroup()
+                        .addComponent(unitsInput, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(subject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(editSubjectDetailsPanelLayout.createSequentialGroup()
-                .addGap(203, 203, 203)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editSubjectDetailsPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(editSubjectDetailsHeader)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addGap(230, 230, 230))
         );
         editSubjectDetailsPanelLayout.setVerticalGroup(
             editSubjectDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

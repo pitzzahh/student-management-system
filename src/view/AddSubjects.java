@@ -117,7 +117,7 @@ public class AddSubjects extends javax.swing.JFrame {
         jScrollPane1.setViewportView(subjectsTextArea);
 
         subjectUnitsInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        subjectUnitsInput.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
+        subjectUnitsInput.setModel(new javax.swing.SpinnerNumberModel(1, 1, 6, 1));
 
         javax.swing.GroupLayout addStudentPanelLayout = new javax.swing.GroupLayout(addStudentPanel);
         addStudentPanel.setLayout(addStudentPanelLayout);
@@ -141,7 +141,7 @@ public class AddSubjects extends javax.swing.JFrame {
                                             .addComponent(subjectDescriptionInput, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                                     .addGroup(addStudentPanelLayout.createSequentialGroup()
-                                        .addComponent(subjectUnitsInput)
+                                        .addComponent(subjectUnitsInput, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
                                         .addGap(246, 246, 246)))
                                 .addComponent(jScrollPane1))
                             .addGroup(addStudentPanelLayout.createSequentialGroup()

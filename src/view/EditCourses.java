@@ -15,7 +15,7 @@ import view.editCourseDetails.EditCourseDetails;
  * @author 19
  */
 public class EditCourses extends javax.swing.JFrame {
-    public static int selectedCourse = 0;
+    public static int selectedCourse;
     /**
      * Creates new form EditCourses
      */
