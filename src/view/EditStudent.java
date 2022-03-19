@@ -95,7 +95,7 @@ public class EditStudent extends javax.swing.JFrame {
         studentIdLabel = new javax.swing.JLabel();
         lastNameInput = new javax.swing.JTextField();
         courseLabel = new javax.swing.JLabel();
-        coursesComboBox = new javax.swing.JComboBox<String>();
+        coursesComboBox = new javax.swing.JComboBox<>();
         addressInput = new javax.swing.JTextField();
         studentIdInput = new javax.swing.JTextField();
         saveStudentButton = new javax.swing.JButton();

@@ -20,7 +20,7 @@ import model.Subject;
 public class EditCourseDetails extends javax.swing.JFrame {
     
     private static Course selectedCourse = new Course();
-    private static final Subject subject = new Subject();
+    private static Subject subject = new Subject();
     
     /**
      * Creates new form EditCourseDetails
@@ -64,7 +64,7 @@ public class EditCourseDetails extends javax.swing.JFrame {
         
         // adds all the subjects in the combo box
         if(Process.getSubjects().length != 0) {
-            getLatestCourseSubjects();
+            getCourseSubjects();
             subjectsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18));
             subjectsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Process.getSubjects()));
         } 
@@ -82,25 +82,16 @@ public class EditCourseDetails extends javax.swing.JFrame {
         }
     }
     
-    private void checkIfSubjectIsAlreadyAdded(Subject subject) {
-        Process.exist = false;
-        for (Course currentCourse : Process.courses) {
-            if (currentCourse.getSubjects().contains(subject)) {
-                Process.exist = true;
-                break;
-            }
-        }
+    private boolean checkIfSubjectIsAlreadyAdded(Subject subject) {
+        return !Process.courses.get(EditCourses.selectedCourse).getSubjects().get(EditCourses.selectedCourse).getSubjectCode().equals(subject.getSubjectCode());
     }
     
-    public static void getLatestCourseSubjects() {
-        for(int i = 0; i < Process.courses.size(); i++) {
-            if(!Process.courses.get(i).getSubjects().isEmpty()) {
-                Process.listOfCourseSubjects.add(Process.courses.get(i).getSubjects().get(i));  
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "NO SUBJECTS");
-                break;
-            }
+    public static void getCourseSubjects() {
+        if(!Process.courses.get(EditCourses.selectedCourse).getSubjects().isEmpty()) {
+            Process.listOfCourseSubjects.add(Process.courses.get(EditCourses.selectedCourse).getSubjects().get(EditCourses.selectedCourse));  
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "NO SUBJECTS");
         }
     }
     /**
@@ -334,13 +325,11 @@ public class EditCourseDetails extends javax.swing.JFrame {
 
     private void addSubjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSubjectButtonActionPerformed
 
-        subject.setSubjectCode(Process.subjects.get(subjectsComboBox.getSelectedIndex()).getSubjectCode());
-        subject.setSubjectDescription(Process.subjects.get(subjectsComboBox.getSelectedIndex()).getSubjectDescription());
-        subject.setUnits(Process.subjects.get(subjectsComboBox.getSelectedIndex()).getUnits());
-            
-        checkIfSubjectIsAlreadyAdded(subject);
-            
-        if(Process.exist) {
+        subject = new Subject(Process.subjects.get(subjectsComboBox.getSelectedIndex()).getSubjectCode(), 
+                              Process.subjects.get(subjectsComboBox.getSelectedIndex()).getSubjectDescription(),
+                              Process.subjects.get(subjectsComboBox.getSelectedIndex()).getUnits());
+        
+        if(checkIfSubjectIsAlreadyAdded(subject)) {
             JOptionPane.showMessageDialog(null, "SUBJECT ALREADY ADDED");
         }
         else {
@@ -353,10 +342,9 @@ public class EditCourseDetails extends javax.swing.JFrame {
     private void removeSubjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSubjectButtonActionPerformed
         
         try {
-            getLatestCourseSubjects();
-            checkIfSubjectIsAlreadyAdded(Process.subjects.get(subjectsComboBox.getSelectedIndex()));
-        
-            if(Process.exist) {
+            getCourseSubjects();
+
+            if(checkIfSubjectIsAlreadyAdded(Process.subjects.get(subjectsComboBox.getSelectedIndex()))) {
                 Process.courses.get(EditCourses.selectedCourse).getSubjects().remove(subjectsComboBox.getSelectedIndex());
                 courseSubjectsList.selectAll();
                 courseSubjectsList.replaceSelection("");
