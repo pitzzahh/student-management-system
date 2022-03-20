@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import fileHandling.Process;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
+
 import model.Course;
 import model.Subject;
 
@@ -28,8 +30,10 @@ public class AddCourse extends javax.swing.JFrame {
         
         Process.subjects = new ArrayList<>();
         Process.courses = new ArrayList<>();
+        
         Process.listOfAddedSubjects = new ArrayList<>();
-
+        Process.listOfCourseSubjects = new ArrayList<>();
+        
         Process.populateCourses();
         Process.populateSubjects();
 
@@ -50,7 +54,7 @@ public class AddCourse extends javax.swing.JFrame {
             subjectsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Process.getSubjects()));
         }
         else {
-            subjectsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+            subjectsComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
             subjectsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"NO SUBJECTS AVAILABLE"}));
         }
 
@@ -90,59 +94,43 @@ public class AddCourse extends javax.swing.JFrame {
 
         addCoursePanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        addCourseHeader.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        addCourseHeader.setFont(new java.awt.Font("Tahoma", Font.BOLD, 24)); // NOI18N
         addCourseHeader.setText("Add Course");
 
-        courseCodeLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        courseCodeLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         courseCodeLabel.setText("Course Code:");
 
-        courseCodeInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        courseCodeInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                courseCodeInputActionPerformed(evt);
-            }
-        });
+        courseCodeInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
+        courseCodeInput.addActionListener(this::courseCodeInputActionPerformed);
 
-        courseDescriptionLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        courseDescriptionLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         courseDescriptionLabel.setText("Course Description:");
 
-        courseDescriptionInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        courseDescriptionInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
 
-        selectSubjectsLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        selectSubjectsLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         selectSubjectsLabel.setText("Select Subjects:");
 
-        subjectsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        subjectsComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         subjectsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        subjectsComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subjectsComboBoxActionPerformed(evt);
-            }
-        });
+        subjectsComboBox.addActionListener(this::subjectsComboBoxActionPerformed);
 
         addSubjectButton.setBackground(new java.awt.Color(255, 255, 255));
-        addSubjectButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        addSubjectButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-add-48.png"))); // NOI18N
-        addSubjectButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addSubjectButtonActionPerformed(evt);
-            }
-        });
+        addSubjectButton.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
+        addSubjectButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/icons8-add-48.png")))); // NOI18N
+        addSubjectButton.addActionListener(this::addSubjectButtonActionPerformed);
 
         doneButton.setBackground(new java.awt.Color(255, 255, 255));
-        doneButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        doneButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save_medium.png"))); // NOI18N
-        doneButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doneButtonActionPerformed(evt);
-            }
-        });
+        doneButton.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14)); // NOI18N
+        doneButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/save_medium.png")))); // NOI18N
+        doneButton.addActionListener(this::doneButtonActionPerformed);
 
         courseSubjectsList.setColumns(20);
-        courseSubjectsList.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        courseSubjectsList.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         courseSubjectsList.setRows(5);
         scrollPanel.setViewportView(courseSubjectsList);
 
-        addedSubjectsLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addedSubjectsLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         addedSubjectsLabel.setText("Added Subjects");
 
         javax.swing.GroupLayout addCoursePanelLayout = new javax.swing.GroupLayout(addCoursePanel);
@@ -243,17 +231,19 @@ public class AddCourse extends javax.swing.JFrame {
             Process.exist = false;
             
             for(String addedSubject : Process.listOfAddedSubjects) {
-                if (addedSubject.contains(subject.getSubjectCode())) {
+                if (addedSubject.equals(subject.getSubjectCode())) {
                     Process.exist = true;
                     break;
                 }
             }
+            
             if(Process.exist) {
                 JOptionPane.showMessageDialog(null, "SUBJECT ALREADY ADDED");
             }
             else {
                 courseSubjectsList.append(" " + subject.getSubjectDescription() + "\n");
                 JOptionPane.showMessageDialog(null, "SUBJECT ADDED");
+                Process.listOfCourseSubjects.add(subject);
                 Process.listOfAddedSubjects.add(subject.getSubjectCode());
             }
         }
@@ -278,10 +268,12 @@ public class AddCourse extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "COURSE ALREADY EXIST");
             }
             else {
-                Course course = new Course(courseCodeInput.getText().trim(), courseDescriptionInput.getText().trim(), Process.subjects);
+                Course course = new Course(courseCodeInput.getText().trim(), courseDescriptionInput.getText().trim(), Process.listOfCourseSubjects);
                 Process.courses.add(course);
                 Process.saveCoursesToAFile();
                 JOptionPane.showMessageDialog(null, "COURSE ADDED SUCCESSFULLY");
+                Process.listOfAddedSubjects.clear();
+                Process.listOfCourseSubjects.clear();
                 this.dispose();
             }
         }

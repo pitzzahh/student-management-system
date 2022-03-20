@@ -15,7 +15,6 @@ import view.EditSubjects;
  * @author 19
  */
 public class EditSubjectDetails extends javax.swing.JFrame {
-    private static Subject selectedSubject;
     /**
      * Creates new form EditSubjectDetails
      */
@@ -23,8 +22,8 @@ public class EditSubjectDetails extends javax.swing.JFrame {
         
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/edit_subject_small.png")));
-        
-        selectedSubject = Process.subjects.get(EditSubjects.selectedSubject);
+
+        Subject selectedSubject = Process.subjects.get(EditSubjects.selectedSubject);
         
         subject.setText(selectedSubject.getSubjectDescription());
         subjectCodeInput.setText(selectedSubject.getSubjectCode());

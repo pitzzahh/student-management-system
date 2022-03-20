@@ -5,10 +5,13 @@
  */
 package view;
 
-import java.awt.Toolkit;
-import javax.swing.JOptionPane;
+import java.awt.*;
+import javax.swing.*;
+
 import fileHandling.Process;
 import java.util.ArrayList;
+import java.util.Objects;
+
 import view.editCourseDetails.EditCourseDetails;
 /**
  *
@@ -39,11 +42,11 @@ public class EditCourses extends javax.swing.JFrame {
         }
         
         if(Process.getCourses().length != 0) {
-            coursesComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+            coursesComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
             coursesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Process.getCourses()));
         }
         else {
-            coursesComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+            coursesComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
             coursesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"NO COURSES AVAILABLE"}));
         }
     }
@@ -60,7 +63,7 @@ public class EditCourses extends javax.swing.JFrame {
         editOrRemoveCoursePanel = new javax.swing.JPanel();
         editOrRemoveCoursesHeader = new javax.swing.JLabel();
         chooseACourseLabel = new javax.swing.JLabel();
-        coursesComboBox = new javax.swing.JComboBox();
+        coursesComboBox = new javax.swing.JComboBox<>();
         editCourseButton = new javax.swing.JButton();
         removeCourseButton = new javax.swing.JButton();
 
@@ -68,37 +71,25 @@ public class EditCourses extends javax.swing.JFrame {
         setTitle("Edit or Remove Course");
         setResizable(false);
 
-        editOrRemoveCoursesHeader.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        editOrRemoveCoursesHeader.setFont(new java.awt.Font("Tahoma", Font.BOLD, 24)); // NOI18N
         editOrRemoveCoursesHeader.setText("Edit or Remove Course");
 
-        chooseACourseLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        chooseACourseLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         chooseACourseLabel.setText("Choose a Course:");
 
-        coursesComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        coursesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        coursesComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                coursesComboBoxActionPerformed(evt);
-            }
-        });
+        coursesComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
+        coursesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        coursesComboBox.addActionListener(this::coursesComboBoxActionPerformed);
 
         editCourseButton.setBackground(new java.awt.Color(255, 255, 255));
-        editCourseButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        editCourseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-edit-30.png"))); // NOI18N
-        editCourseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editCourseButtonActionPerformed(evt);
-            }
-        });
+        editCourseButton.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        editCourseButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/icons8-edit-30.png")))); // NOI18N
+        editCourseButton.addActionListener(this::editCourseButtonActionPerformed);
 
         removeCourseButton.setBackground(new java.awt.Color(255, 255, 255));
-        removeCourseButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        removeCourseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Remove_24px.png"))); // NOI18N
-        removeCourseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeCourseButtonActionPerformed(evt);
-            }
-        });
+        removeCourseButton.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        removeCourseButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/Remove_24px.png")))); // NOI18N
+        removeCourseButton.addActionListener(this::removeCourseButtonActionPerformed);
 
         javax.swing.GroupLayout editOrRemoveCoursePanelLayout = new javax.swing.GroupLayout(editOrRemoveCoursePanel);
         editOrRemoveCoursePanel.setLayout(editOrRemoveCoursePanelLayout);
@@ -176,8 +167,6 @@ public class EditCourses extends javax.swing.JFrame {
             selectedCourse = coursesComboBox.getSelectedIndex();
             new EditCourseDetails().setVisible(true);
         }
-        
-
     }//GEN-LAST:event_editCourseButtonActionPerformed
 
     private void coursesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coursesComboBoxActionPerformed

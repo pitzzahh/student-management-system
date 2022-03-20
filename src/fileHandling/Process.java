@@ -27,7 +27,7 @@ import model.Subject;
 public class Process {
     
     public static final Color LIGHT_COLOR = new Color(255, 255, 255);
-    public static final Color DARK_COLOR = new Color(68, 68, 68);
+    public static final Color DARK_COLOR = new Color(33,37,43);
 
     public static ArrayList<String> listOfAddedSubjects;
     public static ArrayList<Subject> listOfCourseSubjects;

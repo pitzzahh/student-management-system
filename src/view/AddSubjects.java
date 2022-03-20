@@ -6,8 +6,10 @@
 package view;
 
 import fileHandling.Process;
-import java.awt.Toolkit;
+
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.swing.JOptionPane;
 import model.Subject;
 
@@ -73,50 +75,42 @@ public class AddSubjects extends javax.swing.JFrame {
 
         addStudentPanel.setBackground(new java.awt.Color(250, 250, 250));
 
-        addSubjectHeader.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        addSubjectHeader.setFont(new java.awt.Font("Tahoma", Font.BOLD, 24)); // NOI18N
         addSubjectHeader.setText("Add Subjects");
 
-        subjectCodeInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        subjectCodeInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
 
-        subjectDescriptionInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        subjectDescriptionInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         subjectDescriptionInput.setText(" ");
 
-        subjectUnitsLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        subjectUnitsLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         subjectUnitsLabel.setText("Units:");
 
-        subjectCodeLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        subjectCodeLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         subjectCodeLabel.setText("Subject code:");
 
-        subjectDescriptionLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        subjectDescriptionLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         subjectDescriptionLabel.setText("Subject description:");
 
         addSubjectButton.setBackground(new java.awt.Color(255, 255, 255));
-        addSubjectButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        addSubjectButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-add-48.png"))); // NOI18N
-        addSubjectButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addSubjectButtonActionPerformed(evt);
-            }
-        });
+        addSubjectButton.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
+        addSubjectButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/icons8-add-48.png")))); // NOI18N
+        addSubjectButton.addActionListener(this::addSubjectButtonActionPerformed);
 
         listOfSubjectsLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         listOfSubjectsLabel.setText("List of Subjects");
 
         doneButton.setBackground(new java.awt.Color(255, 255, 255));
-        doneButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        doneButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save_medium.png"))); // NOI18N
-        doneButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doneButtonActionPerformed(evt);
-            }
-        });
+        doneButton.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 14)); // NOI18N
+        doneButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/save_medium.png")))); // NOI18N
+        doneButton.addActionListener(this::doneButtonActionPerformed);
 
         subjectsTextArea.setColumns(20);
-        subjectsTextArea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        subjectsTextArea.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         subjectsTextArea.setRows(5);
         jScrollPane1.setViewportView(subjectsTextArea);
 
-        subjectUnitsInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        subjectUnitsInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         subjectUnitsInput.setModel(new javax.swing.SpinnerNumberModel(1, 1, 6, 1));
 
         javax.swing.GroupLayout addStudentPanelLayout = new javax.swing.GroupLayout(addStudentPanel);
@@ -214,6 +208,7 @@ public class AddSubjects extends javax.swing.JFrame {
         }
         else {
             Process.exist = false;
+            
             for (Subject subject : Process.subjects) {
                 if (subject.getSubjectCode().equals(subjectCodeInput.getText().trim())) {
                     Process.exist = true;

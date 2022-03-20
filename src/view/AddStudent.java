@@ -5,9 +5,12 @@
  */
 package view;
 
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
+
 import fileHandling.Process;
-import java.awt.Toolkit;
+
 import javax.swing.JOptionPane;
 import model.Student;
 /**
@@ -45,11 +48,11 @@ public class AddStudent extends javax.swing.JFrame {
         }
         
         if(Process.getCourses().length != 0) {
-            coursesComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-            coursesComboBox.setModel(new javax.swing.DefaultComboBoxModel(Process.getCourses()));
+            coursesComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
+            coursesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Process.getCourses()));
         }
         else {
-            coursesComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+            coursesComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
             coursesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"NO COURSES AVAILABLE"}));
         }
     }
@@ -76,59 +79,51 @@ public class AddStudent extends javax.swing.JFrame {
         studentIdLabel = new javax.swing.JLabel();
         studentIdInput = new javax.swing.JTextField();
         courseLabel = new javax.swing.JLabel();
-        coursesComboBox = new javax.swing.JComboBox();
+        coursesComboBox = new javax.swing.JComboBox<>();
         addStudentButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Student");
         setResizable(false);
 
-        addStudentHeader.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        addStudentHeader.setFont(new java.awt.Font("Tahoma", Font.BOLD, 24)); // NOI18N
         addStudentHeader.setText("Add Student Information");
 
-        firstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        firstNameLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         firstNameLabel.setText("First Name:");
 
-        firstNameInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        firstNameInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
 
-        lastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lastNameLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         lastNameLabel.setText("Last Name:");
 
-        lastNameInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lastNameInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
 
-        ageLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ageLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         ageLabel.setText("Age:");
 
-        ageInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ageInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
 
-        addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addressLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         addressLabel.setText("Address:");
 
-        addressInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addressInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
 
-        studentIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        studentIdLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         studentIdLabel.setText("Student ID:");
 
-        studentIdInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        studentIdInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                studentIdInputActionPerformed(evt);
-            }
-        });
+        studentIdInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
+        studentIdInput.addActionListener(this::studentIdInputActionPerformed);
 
-        courseLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        courseLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         courseLabel.setText("Course:");
 
-        coursesComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        coursesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        coursesComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
+        coursesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         addStudentButton.setBackground(new java.awt.Color(255, 255, 255));
-        addStudentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save_medium.png"))); // NOI18N
-        addStudentButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addStudentButtonActionPerformed(evt);
-            }
-        });
+        addStudentButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/save_medium.png")))); // NOI18N
+        addStudentButton.addActionListener(this::addStudentButtonActionPerformed);
 
         javax.swing.GroupLayout addStudentPanelLayout = new javax.swing.GroupLayout(addStudentPanel);
         addStudentPanel.setLayout(addStudentPanelLayout);
@@ -215,27 +210,32 @@ public class AddStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentButtonActionPerformed
-        
-        if((firstNameInput.getText().trim().isEmpty() && lastNameInput.getText().trim().isEmpty() && addressInput.getText().trim().isEmpty() && studentIdInput.getText().trim().isEmpty()) && !Process.isNumber(studentIdInput.getText())) {
-            JOptionPane.showMessageDialog(null, "PLEASE INSERT THE FIELDS PROPERLY");
+        if(Process.courses.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "CANNOT ADD STUDENT BECAUSE THERE ARE NO COURSES AVAILABLE");
+            this.dispose();
         }
         else {
-            Process.exist = false;
-            for (Student student : Process.students) {
-                if (student.getStudentNumber().equals(studentIdInput.getText().trim())) {
-                    Process.exist = true;
-                    break;
-                }
-            }
-            if(Process.exist) {
-                JOptionPane.showMessageDialog(null, "STUDENT ALREADY EXISTS");
+            if((firstNameInput.getText().trim().isEmpty() && lastNameInput.getText().trim().isEmpty() && addressInput.getText().trim().isEmpty() && studentIdInput.getText().trim().isEmpty()) && !Process.isNumber(studentIdInput.getText())) {
+                JOptionPane.showMessageDialog(null, "PLEASE INSERT THE FIELDS PROPERLY");
             }
             else {
-                Student student = new Student(firstNameInput.getText().trim(), lastNameInput.getText().trim(), Byte.parseByte(ageInput.getText().trim()), addressInput.getText().trim(), studentIdInput.getText().trim(), Process.courses.get(coursesComboBox.getSelectedIndex()));
-                Process.students.add(student);
-                Process.saveStudentsToAFile();
-                JOptionPane.showMessageDialog(null, "STUDENT ADDED");      
-                this.dispose();
+               Process.exist = false;
+                for (Student student : Process.students) {
+                    if (student.getStudentNumber().equals(studentIdInput.getText().trim())) {
+                        Process.exist = true;
+                        break;
+                    }
+                }
+                if(Process.exist) {
+                    JOptionPane.showMessageDialog(null, "STUDENT ALREADY EXISTS");
+                }
+                else {
+                    Student student = new Student(firstNameInput.getText().trim(), lastNameInput.getText().trim(), Byte.parseByte(ageInput.getText().trim()), addressInput.getText().trim(), studentIdInput.getText().trim(), Process.courses.get(coursesComboBox.getSelectedIndex()));
+                    Process.students.add(student);
+                    Process.saveStudentsToAFile();
+                    JOptionPane.showMessageDialog(null, "STUDENT ADDED");      
+                    this.dispose();
+                }
             }
         }
     }//GEN-LAST:event_addStudentButtonActionPerformed
@@ -284,7 +284,7 @@ public class AddStudent extends javax.swing.JFrame {
     private javax.swing.JTextField ageInput;
     private javax.swing.JLabel ageLabel;
     private javax.swing.JLabel courseLabel;
-    private javax.swing.JComboBox coursesComboBox;
+    private javax.swing.JComboBox<String> coursesComboBox;
     private javax.swing.JTextField firstNameInput;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JTextField lastNameInput;

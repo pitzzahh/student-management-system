@@ -8,6 +8,7 @@ import fileHandling.Process;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.swing.JOptionPane;
 import model.Course;
 /**
@@ -24,8 +25,10 @@ public class EditStudent extends javax.swing.JFrame {
         
         Process.students = new ArrayList<>();
         Process.courses = new ArrayList<>();
+
         Process.populateStudents();
         Process.populateCourses();
+
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/icons8-edit-profile-30.png")));
         if(!Process.students.isEmpty()) {
             firstNameInput.setText(Process.students.get(studentsComboBox.getSelectedIndex()).getFirstName());
@@ -65,7 +68,7 @@ public class EditStudent extends javax.swing.JFrame {
             coursesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Process.getCourses()));
         }
         else {
-            studentsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+            studentsComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
             studentsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"NO STUDENTS AVAILABLE"}));
             
             coursesComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18));
@@ -106,71 +109,55 @@ public class EditStudent extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
 
-        editOrRemoveStudentHeader.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        editOrRemoveStudentHeader.setFont(new java.awt.Font("Tahoma", Font.BOLD, 24)); // NOI18N
         editOrRemoveStudentHeader.setText("Edit or Remove Student");
 
-        selectAStudentLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        selectAStudentLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         selectAStudentLabel.setText("Select a Student:");
 
-        studentsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        studentsComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         studentsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student 1", "Student 2", "Student 3", "Student 4" }));
-        studentsComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                studentsComboBoxActionPerformed(evt);
-            }
-        });
+        studentsComboBox.addActionListener(evt -> studentsComboBoxActionPerformed());
 
-        firstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        firstNameLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         firstNameLabel.setText("First Name:");
 
-        lastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lastNameLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         lastNameLabel.setText("Last Name:");
 
-        ageLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ageLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         ageLabel.setText("Age:");
 
-        ageInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ageInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
 
-        addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addressLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         addressLabel.setText("Address:");
 
-        firstNameInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        firstNameInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
 
-        studentIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        studentIdLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         studentIdLabel.setText("Student ID:");
 
-        lastNameInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lastNameInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lastNameInputActionPerformed(evt);
-            }
-        });
+        lastNameInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
+        lastNameInput.addActionListener(this::lastNameInputActionPerformed);
 
-        courseLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        courseLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         courseLabel.setText("Course:");
 
-        coursesComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        coursesComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         coursesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Course 1", "Course 2", "Course 3", "Course 4" }));
 
-        addressInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addressInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
 
-        studentIdInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        studentIdInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
 
         saveStudentButton.setBackground(new java.awt.Color(255, 255, 255));
-        saveStudentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save_24px.png"))); // NOI18N
-        saveStudentButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveStudentButtonActionPerformed(evt);
-            }
-        });
+        saveStudentButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/save_24px.png")))); // NOI18N
+        saveStudentButton.addActionListener(this::saveStudentButtonActionPerformed);
 
         removeStudentButton.setBackground(new java.awt.Color(255, 255, 255));
-        removeStudentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Remove_24px.png"))); // NOI18N
-        removeStudentButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeStudentButtonActionPerformed(evt);
-            }
-        });
+        removeStudentButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/Remove_24px.png")))); // NOI18N
+        removeStudentButton.addActionListener(evt -> removeStudentButtonActionPerformed());
 
         javax.swing.GroupLayout editOrRemoveStudentPanelLayout = new javax.swing.GroupLayout(editOrRemoveStudentPanel);
         editOrRemoveStudentPanel.setLayout(editOrRemoveStudentPanelLayout);
@@ -267,7 +254,7 @@ public class EditStudent extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lastNameInputActionPerformed
 
-    private void studentsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentsComboBoxActionPerformed
+    private void studentsComboBoxActionPerformed() {//GEN-FIRST:event_studentsComboBoxActionPerformed
         firstNameInput.setText(Process.students.get(studentsComboBox.getSelectedIndex()).getFirstName());
         lastNameInput.setText(Process.students.get(studentsComboBox.getSelectedIndex()).getLastName());
         ageInput.setText(String.valueOf(Process.students.get(studentsComboBox.getSelectedIndex()).getAge()));
@@ -285,11 +272,17 @@ public class EditStudent extends javax.swing.JFrame {
         coursesComboBox.setSelectedIndex(courseIndex);
     }//GEN-LAST:event_studentsComboBoxActionPerformed
 
-    private void removeStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeStudentButtonActionPerformed
-        Process.students.remove(studentsComboBox.getSelectedIndex());
-        Process.saveStudentsToAFile();
-        JOptionPane.showMessageDialog(null, "STUDENT REMVED SUCCESSFULLY");
+    private void removeStudentButtonActionPerformed() {//GEN-FIRST:event_removeStudentButtonActionPerformed
+        if(Process.students.isEmpty() || Process.courses.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "NO STUDENT TO BE REMOVED");
+        }
+        else {
+            Process.students.remove(studentsComboBox.getSelectedIndex());
+            Process.saveStudentsToAFile();
+            JOptionPane.showMessageDialog(null, "STUDENT REMOVED SUCCESSFULLY");
+        }
         this.dispose();
+
     }//GEN-LAST:event_removeStudentButtonActionPerformed
 
     private void saveStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveStudentButtonActionPerformed
