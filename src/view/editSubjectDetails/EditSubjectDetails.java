@@ -6,7 +6,9 @@
 package view.editSubjectDetails;
 
 import fileHandling.Process;
-import java.awt.Toolkit;
+
+import java.awt.*;
+import java.util.Objects;
 import javax.swing.JOptionPane;
 import model.Subject;
 import view.EditSubjects;
@@ -72,36 +74,32 @@ public class EditSubjectDetails extends javax.swing.JFrame {
 
         editSubjectDetailsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        editSubjectDetailsHeader.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        editSubjectDetailsHeader.setFont(new java.awt.Font("Tahoma", Font.BOLD, 24)); // NOI18N
         editSubjectDetailsHeader.setText("Edit Subject Details");
 
-        subject.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        subject.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
 
-        selectedSubjectLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        selectedSubjectLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         selectedSubjectLabel.setText("Selected Subject:");
 
-        subjectCodeLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        subjectCodeLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         subjectCodeLabel.setText("Subject code:");
 
-        subjectDescriptionLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        subjectDescriptionLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         subjectDescriptionLabel.setText("Subject description:");
 
-        unitsLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        unitsLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         unitsLabel.setText("Units:");
 
-        subjectCodeInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        subjectCodeInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
 
-        subjectDescriptionInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        subjectDescriptionInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
 
         saveButton.setBackground(new java.awt.Color(255, 255, 255));
-        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save_24px.png"))); // NOI18N
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
-            }
-        });
+        saveButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/save_24px.png")))); // NOI18N
+        saveButton.addActionListener(this::saveButtonActionPerformed);
 
-        unitsInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        unitsInput.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         unitsInput.setModel(new javax.swing.SpinnerNumberModel(1, 1, 6, 1));
 
         javax.swing.GroupLayout editSubjectDetailsPanelLayout = new javax.swing.GroupLayout(editSubjectDetailsPanel);

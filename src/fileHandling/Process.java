@@ -43,7 +43,7 @@ public class Process {
     
     public static void populateSubjects() {
         try {
-            try (ObjectInputStream subjectsObjectInputStream = new ObjectInputStream(new FileInputStream("Subjects.dat"))) {
+            try (ObjectInputStream subjectsObjectInputStream = new ObjectInputStream(new FileInputStream("src/resource/Subjects.dat"))) {
                 endOfFile = false;
                 while(!endOfFile) {
                     try {
@@ -64,7 +64,7 @@ public class Process {
     
     public static void populateCourses() {
         try {
-            try (ObjectInputStream coursesObjectInputStream = new ObjectInputStream(new FileInputStream("Courses.dat"))) {
+            try (ObjectInputStream coursesObjectInputStream = new ObjectInputStream(new FileInputStream("src/resource/Courses.dat"))) {
                 endOfFile = false;
                 while(!endOfFile) {
                     try {
@@ -84,7 +84,7 @@ public class Process {
     
     public static void populateStudents() {
         try {
-            try (ObjectInputStream studentsObjectInputStream = new ObjectInputStream(new FileInputStream("Students.dat"))) {
+            try (ObjectInputStream studentsObjectInputStream = new ObjectInputStream(new FileInputStream("src/resource/Students.dat"))) {
                 endOfFile = false;
                 while(!endOfFile) {
                     try {
@@ -104,7 +104,7 @@ public class Process {
     
     public static void saveSubjectsToAFile(){
         try {
-            try (ObjectOutputStream subjectsObjectOutputStream = new ObjectOutputStream(new FileOutputStream("Subjects.dat"))) {
+            try (ObjectOutputStream subjectsObjectOutputStream = new ObjectOutputStream(new FileOutputStream("src/resource/Subjects.dat"))) {
                 for(Subject subject : subjects) {
                     subjectsObjectOutputStream.writeObject(subject);
                 }
@@ -117,7 +117,7 @@ public class Process {
     
     public static void saveCoursesToAFile() {
         try {
-            try (ObjectOutputStream coursesObjectOutputStream = new ObjectOutputStream(new FileOutputStream("Courses.dat"))) {
+            try (ObjectOutputStream coursesObjectOutputStream = new ObjectOutputStream(new FileOutputStream("src/resource/Courses.dat"))) {
                 for(Course course : courses) {
                     coursesObjectOutputStream.writeObject(course);
                 }
@@ -130,7 +130,7 @@ public class Process {
     
     public static void saveStudentsToAFile() {
         try {
-            try (ObjectOutputStream studentsObjectOutputStream = new ObjectOutputStream(new FileOutputStream("Students.dat"))) {
+            try (ObjectOutputStream studentsObjectOutputStream = new ObjectOutputStream(new FileOutputStream("src/resource/Students.dat"))) {
                 for(Student student : students) {
                     studentsObjectOutputStream.writeObject(student);
                 }
@@ -181,9 +181,8 @@ public class Process {
     }
     public static void populateTheme() {
         try {
-            try (ObjectInputStream themesObjectInputStream = new ObjectInputStream(new FileInputStream("Theme.dat"))) {
+            try (ObjectInputStream themesObjectInputStream = new ObjectInputStream(new FileInputStream("src/resource/Theme.dat"))) {
                 theme = (Boolean)themesObjectInputStream.readObject();
-                themesObjectInputStream.close();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Process.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -193,9 +192,8 @@ public class Process {
     }
     public static void saveTheme() {
         try {
-            try (ObjectOutputStream statesObjectOutputStream = new ObjectOutputStream(new FileOutputStream("Theme.dat"))) {
+            try (ObjectOutputStream statesObjectOutputStream = new ObjectOutputStream(new FileOutputStream("src/resource/Theme.dat"))) {
                 statesObjectOutputStream.writeObject(theme);
-                statesObjectOutputStream.close();
             }
         } catch(IOException exception) {
             JOptionPane.showMessageDialog(null, "ERROR SAVING THEME");

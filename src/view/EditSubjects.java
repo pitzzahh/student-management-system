@@ -5,10 +5,14 @@
  */
 package view;
 
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
+
 import fileHandling.Process;
-import java.awt.Toolkit;
-import javax.swing.JOptionPane;
+
+import javax.swing.*;
+
 import view.editSubjectDetails.EditSubjectDetails;
 
 /**
@@ -38,11 +42,11 @@ public class EditSubjects extends javax.swing.JFrame {
             editOrRemoveSubjectsPanel.setBackground(Process.LIGHT_COLOR);
         }
         if(Process.getSubjects().length != 0) {
-            subjectsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+            subjectsComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
             subjectsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Process.getSubjects()));
         }
         else {
-            subjectsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+            subjectsComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
             subjectsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"NO SUBJECTS AVAILABLE"}));
         }
     }
@@ -58,7 +62,7 @@ public class EditSubjects extends javax.swing.JFrame {
 
         editOrRemoveSubjectsPanel = new javax.swing.JPanel();
         chooseASubjectLabel = new javax.swing.JLabel();
-        subjectsComboBox = new javax.swing.JComboBox();
+        subjectsComboBox = new javax.swing.JComboBox<>();
         editOrRemoveSubjectsHeader = new javax.swing.JLabel();
         removeSubject = new javax.swing.JButton();
         editSubjectDetaisl = new javax.swing.JButton();
@@ -68,37 +72,25 @@ public class EditSubjects extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
 
-        chooseASubjectLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        chooseASubjectLabel.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
         chooseASubjectLabel.setText("Choose a Subject:");
 
-        subjectsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        subjectsComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        subjectsComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subjectsComboBoxActionPerformed(evt);
-            }
-        });
+        subjectsComboBox.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
+        subjectsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        subjectsComboBox.addActionListener(this::subjectsComboBoxActionPerformed);
 
-        editOrRemoveSubjectsHeader.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        editOrRemoveSubjectsHeader.setFont(new java.awt.Font("Tahoma", Font.BOLD, 24)); // NOI18N
         editOrRemoveSubjectsHeader.setText("Edit or Remove Subjects");
 
         removeSubject.setBackground(new java.awt.Color(255, 255, 255));
-        removeSubject.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        removeSubject.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Remove_24px.png"))); // NOI18N
-        removeSubject.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeSubjectActionPerformed(evt);
-            }
-        });
+        removeSubject.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        removeSubject.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/Remove_24px.png")))); // NOI18N
+        removeSubject.addActionListener(this::removeSubjectActionPerformed);
 
         editSubjectDetaisl.setBackground(new java.awt.Color(255, 255, 255));
-        editSubjectDetaisl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        editSubjectDetaisl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-edit-30.png"))); // NOI18N
-        editSubjectDetaisl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editSubjectDetaislActionPerformed(evt);
-            }
-        });
+        editSubjectDetaisl.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 18)); // NOI18N
+        editSubjectDetaisl.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/icons8-edit-30.png")))); // NOI18N
+        editSubjectDetaisl.addActionListener(this::editSubjectDetailsActionPerformed);
 
         javax.swing.GroupLayout editOrRemoveSubjectsPanelLayout = new javax.swing.GroupLayout(editOrRemoveSubjectsPanel);
         editOrRemoveSubjectsPanel.setLayout(editOrRemoveSubjectsPanelLayout);
@@ -172,7 +164,7 @@ public class EditSubjects extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_removeSubjectActionPerformed
 
-    private void editSubjectDetaislActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSubjectDetaislActionPerformed
+    private void editSubjectDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSubjectDetaislActionPerformed
         
         if(Process.subjects.isEmpty()) {
             JOptionPane.showMessageDialog(null, "THERE ARE NO SUBJECTS TO BE EDITED");
@@ -181,12 +173,12 @@ public class EditSubjects extends javax.swing.JFrame {
             selectedSubject = subjectsComboBox.getSelectedIndex();
             new EditSubjectDetails().setVisible(true);
         }
-    }//GEN-LAST:event_editSubjectDetaislActionPerformed
+    }//GEN-LAST:event_editSubjectDetailsActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -199,13 +191,7 @@ public class EditSubjects extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditSubjects.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditSubjects.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditSubjects.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(EditSubjects.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -225,6 +211,6 @@ public class EditSubjects extends javax.swing.JFrame {
     private javax.swing.JPanel editOrRemoveSubjectsPanel;
     private javax.swing.JButton editSubjectDetaisl;
     private javax.swing.JButton removeSubject;
-    private javax.swing.JComboBox subjectsComboBox;
+    private javax.swing.JComboBox<String> subjectsComboBox;
     // End of variables declaration//GEN-END:variables
 }
