@@ -4,6 +4,10 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/build/classes/view/editSubject" />
+      <excludeFolder url="file://$MODULE_DIR$/build/classes/controller" />
+      <excludeFolder url="file://$MODULE_DIR$/build/classes/PACKAGE_NAME" />
+      <excludeFolder url="file://$MODULE_DIR$/build/classes/working" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
