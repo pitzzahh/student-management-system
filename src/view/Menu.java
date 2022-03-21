@@ -97,14 +97,13 @@ public class Menu extends javax.swing.JFrame {
 
         fileMenu.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/file_small.png")))); // NOI18N
 
-        toggleDarkModeMenu.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/dark_mode_small.png")))); // NOI18N
         if(Process.isDarkTheme()) {
-            toggleDarkModeMenu.setText("Dark Theme");
-            toggleDarkModeMenu.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/dark_mode_small.png"))));
-        }
-        else {
             toggleDarkModeMenu.setText("Light Theme");
             toggleDarkModeMenu.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/light_mode_small.png"))));
+        }
+        else {
+            toggleDarkModeMenu.setText("Dark Theme");
+            toggleDarkModeMenu.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/dark_mode_small.png"))));
         }
         toggleDarkModeMenu.addActionListener(this::toggleDarkModeMenuActionPerformed);
         fileMenu.add(toggleDarkModeMenu);
@@ -212,14 +211,8 @@ public class Menu extends javax.swing.JFrame {
             }
         }
         else {
-            if(Process.isDarkTheme()) {
-                toggleDarkModeMenu.setText("Dark Theme");
-                toggleDarkModeMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/dark_mode_small.png")));
-            }
-            else {
-                toggleDarkModeMenu.setText("Light Theme");
-                toggleDarkModeMenu.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/light_mode_small.png"))));
-            }
+            toggleDarkModeMenu.setText("Light Theme");
+            toggleDarkModeMenu.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/light_mode_small.png"))));
             menuPanel.setBackground(Process.DARK_COLOR);
             menuBar.setBackground(Process.DARK_COLOR);
             setBackground(Process.DARK_COLOR);

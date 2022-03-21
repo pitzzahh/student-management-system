@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import fileHandling.Process;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import model.Student;
 /**
  *
@@ -26,21 +27,26 @@ public class ViewStudents extends javax.swing.JFrame {
         Process.students = new ArrayList<>();
         Process.populateStudents();
         
-        addRowToTable();
-        if(fileHandling.Process.isDarkTheme()) {
+        addStudentToTable();
+        JTableHeader tableHeader = studentsTable.getTableHeader();
+        
+
+        if(Process.isDarkTheme()) {
             viewStudentsPanel.setBackground(Process.DARK_COLOR);
             viewStudentsHeader.setForeground(Process.LIGHT_COLOR);
+            tableScroller.setBackground(Process.LIGHT_COLOR);
+            tableScroller.setForeground(Process.DARK_COLOR);
             studentsTable.setBackground(Process.DARK_COLOR);
             studentsTable.setForeground(Process.LIGHT_COLOR);
+            tableHeader.setBackground(Process.LIGHT_COLOR);
+            tableHeader.setForeground(Process.DARK_COLOR);
         }
         else {
             viewStudentsPanel.setBackground(Process.LIGHT_COLOR);
             viewStudentsHeader.setForeground(Process.DARK_COLOR);
-            studentsTable.setBackground(Process.LIGHT_COLOR);
-            studentsTable.setForeground(Process.DARK_COLOR);
         }
     }
-    private void addRowToTable() {
+    private void addStudentToTable() {
         DefaultTableModel table = (DefaultTableModel) studentsTable.getModel();
         
         Object[] rowData = new Object[studentsTable.getColumnCount()];
@@ -96,6 +102,8 @@ public class ViewStudents extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        studentsTable.setGridColor(new java.awt.Color(0, 0, 0));
+        studentsTable.setSelectionBackground(new java.awt.Color(0, 102, 255));
         studentsTable.getTableHeader().setReorderingAllowed(false);
         tableScroller.setViewportView(studentsTable);
 
@@ -118,7 +126,7 @@ public class ViewStudents extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(viewStudentsHeader)
                 .addGap(18, 18, 18)
-                .addComponent(tableScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
+                .addComponent(tableScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -129,9 +137,7 @@ public class ViewStudents extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(viewStudentsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(viewStudentsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -141,7 +147,7 @@ public class ViewStudents extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -164,7 +170,9 @@ public class ViewStudents extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new RunnableImpl());
+        java.awt.EventQueue.invokeLater(() -> {
+            new ViewStudents().setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -173,15 +181,4 @@ public class ViewStudents extends javax.swing.JFrame {
     private javax.swing.JLabel viewStudentsHeader;
     private javax.swing.JPanel viewStudentsPanel;
     // End of variables declaration//GEN-END:variables
-
-    private static class RunnableImpl implements Runnable {
-
-        public RunnableImpl() {
-        }
-
-        @Override
-        public void run() {
-            new ViewStudents().setVisible(true);
-        }
-    }
 }
