@@ -73,7 +73,7 @@ public class Menu extends javax.swing.JFrame {
         menuPanel.setMinimumSize(new java.awt.Dimension(0, 0));
 
         homeIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        homeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/students.png"))); // NOI18N
+        homeIcon.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/students.png")))); // NOI18N
         homeIcon.setLabelFor(this);
         homeIcon.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         homeIcon.setFocusable(false);
@@ -95,95 +95,66 @@ public class Menu extends javax.swing.JFrame {
 
         menuBar.setBackground(new java.awt.Color(255, 255, 255));
 
-        fileMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file_small.png"))); // NOI18N
+        fileMenu.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/file_small.png")))); // NOI18N
 
-        toggleDarkModeMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/dark_mode_small.png"))); // NOI18N
-        toggleDarkModeMenu.setText("dark theme");
-        toggleDarkModeMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                toggleDarkModeMenuActionPerformed(evt);
-            }
-        });
+        toggleDarkModeMenu.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/dark_mode_small.png")))); // NOI18N
+        if(Process.isDarkTheme()) {
+            toggleDarkModeMenu.setText("Dark Theme");
+            toggleDarkModeMenu.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/dark_mode_small.png"))));
+        }
+        else {
+            toggleDarkModeMenu.setText("Light Theme");
+            toggleDarkModeMenu.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/light_mode_small.png"))));
+        }
+        toggleDarkModeMenu.addActionListener(this::toggleDarkModeMenuActionPerformed);
         fileMenu.add(toggleDarkModeMenu);
 
-        viewStudentsMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/view_students_small.png"))); // NOI18N
-        viewStudentsMenu.setText("view students");
-        viewStudentsMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewStudentsMenuActionPerformed(evt);
-            }
-        });
+        viewStudentsMenu.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/view_students_small.png")))); // NOI18N
+        viewStudentsMenu.setText("View students");
+        viewStudentsMenu.addActionListener(this::viewStudentsMenuActionPerformed);
         fileMenu.add(viewStudentsMenu);
 
-        exitMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/close_window_24px.png"))); // NOI18N
-        exitMenuItem.setText("exit");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
+        exitMenuItem.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/close_window_24px.png")))); // NOI18N
+        exitMenuItem.setText("Exit");
+        exitMenuItem.addActionListener(this::exitMenuItemActionPerformed);
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
 
-        addMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add_small.png"))); // NOI18N
+        addMenu.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/add_small.png")))); // NOI18N
 
-        addSubjectsMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/new_copy_24px.png"))); // NOI18N
+        addSubjectsMenuItem.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/new_copy_24px.png")))); // NOI18N
         addSubjectsMenuItem.setText("Add Subjects");
-        addSubjectsMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addSubjectsMenuItemActionPerformed(evt);
-            }
-        });
+        addSubjectsMenuItem.addActionListener(this::addSubjectsMenuItemActionPerformed);
         addMenu.add(addSubjectsMenuItem);
 
-        addCourseMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add_course_small.png"))); // NOI18N
+        addCourseMenuItem.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/add_course_small.png")))); // NOI18N
         addCourseMenuItem.setText("Add Course");
-        addCourseMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addCourseMenuItemActionPerformed(evt);
-            }
-        });
+        addCourseMenuItem.addActionListener(this::addCourseMenuItemActionPerformed);
         addMenu.add(addCourseMenuItem);
 
-        addStudentMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add_student_small.png"))); // NOI18N
+        addStudentMenuItem.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/add_student_small.png")))); // NOI18N
         addStudentMenuItem.setText("Add Student");
-        addStudentMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addStudentMenuItemActionPerformed(evt);
-            }
-        });
+        addStudentMenuItem.addActionListener(this::addStudentMenuItemActionPerformed);
         addMenu.add(addStudentMenuItem);
 
         menuBar.add(addMenu);
 
-        editMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/edit_small.png"))); // NOI18N
+        editMenu.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/edit_small.png")))); // NOI18N
 
-        edutSubjectsMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/edit_subject_small.png"))); // NOI18N
+        edutSubjectsMenuItem.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/edit_subject_small.png")))); // NOI18N
         edutSubjectsMenuItem.setText("Edit Subjects");
-        edutSubjectsMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edutSubjectsMenuItemActionPerformed(evt);
-            }
-        });
+        edutSubjectsMenuItem.addActionListener(this::edutSubjectsMenuItemActionPerformed);
         editMenu.add(edutSubjectsMenuItem);
 
-        edutCourseMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add_course_small.png"))); // NOI18N
+        edutCourseMenuItem.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/add_course_small.png")))); // NOI18N
         edutCourseMenuItem.setText("Edit Course");
-        edutCourseMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edutCourseMenuItemActionPerformed(evt);
-            }
-        });
+        edutCourseMenuItem.addActionListener(this::edutCourseMenuItemActionPerformed);
         editMenu.add(edutCourseMenuItem);
 
-        editStudentMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-edit-profile-30.png"))); // NOI18N
+        editStudentMenuItem.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/icons8-edit-profile-30.png")))); // NOI18N
         editStudentMenuItem.setText("Edit Student");
-        editStudentMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editStudentMenuItemActionPerformed(evt);
-            }
-        });
+        editStudentMenuItem.addActionListener(this::editStudentMenuItemActionPerformed);
         editMenu.add(editStudentMenuItem);
 
         menuBar.add(editMenu);
