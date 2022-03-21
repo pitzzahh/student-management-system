@@ -7,7 +7,9 @@ package view;
 
 import java.awt.Toolkit;
 import fileHandling.Process;
-
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import model.Student;
 /**
  *
  * @author 19
@@ -21,6 +23,10 @@ public class ViewStudents extends javax.swing.JFrame {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/view_students_small.png")));
         
+        Process.students = new ArrayList<>();
+        Process.populateStudents();
+        
+        addRowToTable();
         if(fileHandling.Process.isDarkTheme()) {
             viewStudentsPanel.setBackground(Process.DARK_COLOR);
             viewStudentsHeader.setForeground(Process.LIGHT_COLOR);
@@ -34,7 +40,21 @@ public class ViewStudents extends javax.swing.JFrame {
             studentsTable.setForeground(Process.DARK_COLOR);
         }
     }
-
+    private void addRowToTable() {
+        DefaultTableModel table = (DefaultTableModel) studentsTable.getModel();
+        
+        Object[] rowData = new Object[studentsTable.getColumnCount()];
+        
+        for (Student student : Process.students) {
+            rowData[0] = student.getFirstName();
+            rowData[1] = student.getLastName();
+            rowData[2] = student.getAge();
+            rowData[3] = student.getAddress();
+            rowData[4] = student.getStudentNumber();
+            rowData[5] = student.getCourse().getCourseDescription();
+            table.addRow(rowData);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,7 +66,7 @@ public class ViewStudents extends javax.swing.JFrame {
 
         viewStudentsPanel = new javax.swing.JPanel();
         viewStudentsHeader = new javax.swing.JLabel();
-        tabelScroller = new javax.swing.JScrollPane();
+        tableScroller = new javax.swing.JScrollPane();
         studentsTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -58,37 +78,11 @@ public class ViewStudents extends javax.swing.JFrame {
         viewStudentsHeader.setAlignmentY(0.0F);
         viewStudentsHeader.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        tableScroller.setBackground(new java.awt.Color(255, 255, 255));
+
         studentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "First Name", "Last Name", "Age", "Address", "Student Number", "Student Course"
@@ -102,7 +96,8 @@ public class ViewStudents extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabelScroller.setViewportView(studentsTable);
+        studentsTable.getTableHeader().setReorderingAllowed(false);
+        tableScroller.setViewportView(studentsTable);
 
         javax.swing.GroupLayout viewStudentsPanelLayout = new javax.swing.GroupLayout(viewStudentsPanel);
         viewStudentsPanel.setLayout(viewStudentsPanelLayout);
@@ -110,11 +105,11 @@ public class ViewStudents extends javax.swing.JFrame {
             viewStudentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewStudentsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabelScroller)
+                .addComponent(tableScroller)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewStudentsPanelLayout.createSequentialGroup()
-                .addContainerGap(298, Short.MAX_VALUE)
-                .addComponent(viewStudentsHeader)
+                .addGap(298, 298, 298)
+                .addComponent(viewStudentsHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(282, 282, 282))
         );
         viewStudentsPanelLayout.setVerticalGroup(
@@ -122,9 +117,8 @@ public class ViewStudents extends javax.swing.JFrame {
             .addGroup(viewStudentsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(viewStudentsHeader)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(tabelScroller, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(tableScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,30 +154,34 @@ public class ViewStudents extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewStudents.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewStudents.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewStudents.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ViewStudents.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
+        
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewStudents().setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(new RunnableImpl());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable studentsTable;
-    private javax.swing.JScrollPane tabelScroller;
+    private javax.swing.JScrollPane tableScroller;
     private javax.swing.JLabel viewStudentsHeader;
     private javax.swing.JPanel viewStudentsPanel;
     // End of variables declaration//GEN-END:variables
+
+    private static class RunnableImpl implements Runnable {
+
+        public RunnableImpl() {
+        }
+
+        @Override
+        public void run() {
+            new ViewStudents().setVisible(true);
+        }
+    }
 }
