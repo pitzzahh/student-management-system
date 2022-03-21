@@ -320,6 +320,7 @@ public class EditCourseDetails extends javax.swing.JFrame {
             Process.listOfAddedSubjects.add(Process.subjects.get(subjectsComboBox.getSelectedIndex()).getSubjectCode());
             courseSubjectsList.append(" " + Process.subjects.get(subjectsComboBox.getSelectedIndex()).getSubjectDescription() + "\n");
             Process.listOfCourseSubjects.add(Process.subjects.get(subjectsComboBox.getSelectedIndex()));
+            Process.courses.get(EditCourses.selectedCourse).getSubjects().add(Process.subjects.get(subjectsComboBox.getSelectedIndex()));
             JOptionPane.showMessageDialog(null, "SUBJECT ADDED");
         }
     }//GEN-LAST:event_addSubjectButtonActionPerformed
