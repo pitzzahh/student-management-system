@@ -30,7 +30,6 @@ public class ViewStudents extends javax.swing.JFrame {
         addStudentToTable();
         JTableHeader tableHeader = studentsTable.getTableHeader();
         
-
         if(Process.isDarkTheme()) {
             viewStudentsPanel.setBackground(Process.DARK_COLOR);
             viewStudentsHeader.setForeground(Process.LIGHT_COLOR);
@@ -94,12 +93,12 @@ public class ViewStudents extends javax.swing.JFrame {
                 "First Name", "Last Name", "Age", "Address", "Student Number", "Student Course"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
+            final boolean[] canEdit = new boolean[] {
                 false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         studentsTable.setGridColor(new java.awt.Color(0, 0, 0));

@@ -2,3 +2,10 @@
 /dist/
 /build/
 /out/
+/src/cli/
+/src/fileHandling/
+/src/icons/
+/src/main/
+/src/resource/
+/src/view/
+/src/Main.java

@@ -22,7 +22,7 @@ import model.Subject;
 
 /**
  *
- * @author 19
+ * @author pitzzahh
  */
 public class Process {
     
@@ -54,14 +54,12 @@ public class Process {
                         JOptionPane.showMessageDialog(null, exception.getMessage());
                     }
                 }
-                subjectsObjectInputStream.close();
             }
             
         } catch (IOException exception) {
             JOptionPane.showMessageDialog(null, exception.getMessage());
         }
     }
-    
     public static void populateCourses() {
         try {
             try (ObjectInputStream coursesObjectInputStream = new ObjectInputStream(new FileInputStream("src/resource/Courses.dat"))) {
@@ -75,7 +73,6 @@ public class Process {
                         JOptionPane.showMessageDialog(null, exception.getMessage());
                     }
                 }
-                coursesObjectInputStream.close();
             }
         } catch (IOException exception) {
             JOptionPane.showMessageDialog(null, exception.getMessage());
@@ -95,7 +92,6 @@ public class Process {
                         JOptionPane.showMessageDialog(null, exception.getMessage());
                     }
                 }
-                studentsObjectInputStream.close();
             }
         } catch (IOException exception) {
             JOptionPane.showMessageDialog(null, exception.getMessage());
@@ -108,7 +104,6 @@ public class Process {
                 for(Subject subject : subjects) {
                     subjectsObjectOutputStream.writeObject(subject);
                 }
-                subjectsObjectOutputStream.close();
             }
         } catch(IOException exception) {
             JOptionPane.showMessageDialog(null, exception.getMessage());
@@ -121,7 +116,6 @@ public class Process {
                 for(Course course : courses) {
                     coursesObjectOutputStream.writeObject(course);
                 }
-                coursesObjectOutputStream.close();
             }
         } catch(IOException exception) {
             JOptionPane.showMessageDialog(null, exception.getMessage());
@@ -134,7 +128,6 @@ public class Process {
                 for(Student student : students) {
                     studentsObjectOutputStream.writeObject(student);
                 }
-                studentsObjectOutputStream.close();
             }
         } catch(IOException exception) {
             JOptionPane.showMessageDialog(null, exception.getMessage());

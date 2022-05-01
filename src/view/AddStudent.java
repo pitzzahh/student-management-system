@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import model.Student;
 /**
  *
- * @author 19
+ * @author pitzzahh
  */
 public class AddStudent extends javax.swing.JFrame {
 
