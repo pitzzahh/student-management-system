@@ -8,6 +8,12 @@
       <excludeFolder url="file://$MODULE_DIR$/build/classes/controller" />
       <excludeFolder url="file://$MODULE_DIR$/build/classes/PACKAGE_NAME" />
       <excludeFolder url="file://$MODULE_DIR$/build/classes/working" />
+      <excludeFolder url="file://$MODULE_DIR$/src/cli" />
+      <excludeFolder url="file://$MODULE_DIR$/src/fileHandling" />
+      <excludeFolder url="file://$MODULE_DIR$/src/icons" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main" />
+      <excludeFolder url="file://$MODULE_DIR$/src/resource" />
+      <excludeFolder url="file://$MODULE_DIR$/src/view" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
